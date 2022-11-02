@@ -11,4 +11,6 @@ class Assignment:
     """
     def sort_due_dates():
         """A method that sorts through the due dates from most important to least important 
-        """       
+        """ 
+    def add_to_callender():
+        """A meathod that adds the due date to another file called callender"""      
