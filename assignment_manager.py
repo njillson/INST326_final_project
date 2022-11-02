@@ -9,3 +9,6 @@ class Assignment:
         date(str): date assignment is due
         time(str): time assignment is due
     """
+    def sort_due_dates():
+        """A method that sorts through the due dates from most important to least important 
+        """       
