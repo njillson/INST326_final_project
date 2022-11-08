@@ -16,3 +16,5 @@ class Assignment:
         """A meathod that adds the due date to another file called callender""" 
     def sort_assingment_type():
         """A method that sorts assignments based on which class its for"""     
+    def class_names():
+       """A method that sorts classes based on class name"""
