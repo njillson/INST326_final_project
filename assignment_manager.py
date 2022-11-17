@@ -20,13 +20,17 @@ class Assignment:
         
     def assignment_overview(self, assignment):
         """prints to the user with the use of an fstring a message in regards to the assignments"""
+        
     def sort_assignment(self, schedule):
         """A method that sorts assignments based on which class its for
         Custom list sorting with a key function with 2 criteria, first by date, then by point value""" 
-    def late_assignment(self):
+        
+    def late_assignment(self, assignment, due_date):
         """uses conditional expression to print whether or not an assignment will be late"""
+        
     def __add__(self, course):
         """magic method that adds points for a class for the week"""
+        
     def parse_args(args):
         """ Parse command-line arguments.
     
