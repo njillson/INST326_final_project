@@ -42,8 +42,9 @@ class Assignment:
     def assignment_overview(self, assignment):
         """uses f string "f”assignment {assignment.name} is due on {assignment.due} 
         at {assignment.time} and is worth {assignment.points} points”" to give an overview of 
-        the assignment. shows the due date time, and point count.
-        Taylor Tran """  
+        the assignment. This method needs the due date time which is due_time (str),
+        and point value which is points (int).
+    ** Taylor Tran """  
         
     def sort_assignment(self, due_date, due _time, points):
         """A method that sorts assignments based due_date which is a str. 
@@ -59,8 +60,9 @@ class Assignment:
 	    If date => 10:
 		print “assignment is late
         Tells us if an assignment is past its due date. Checks to see if the assignment 
-        is over the date due, then returns a print statement. 
-        Taylor Tran"""" 
+        is over the date due, then returns a print statement. Needs assignment_name (str)
+        and needs due_date (str) and due_time (str). 
+    **Taylor Tran"""" 
         
     def shared_tasks(self, other):
      """Not sure if you want to incorporate into class but if so then person1 wil be self
@@ -82,7 +84,7 @@ class Assignment:
     tasks = {}
     return self.tasks.intersection(other.tasks)
     #or assignments on the same day
-    """
+    **david greenburg"""
     
     def visualize_priorities(Assignment, person):
      """creates a bargraph with each task in an object's task list graphed against their priority level/ urgency
@@ -101,7 +103,7 @@ class Assignment:
         y.append(person.get_priority(task))
     data = {'task':x, 'priority':y}
     sb.barplot(data, x= 'task', y = 'priority')
-    """
+    ** david greenburg"""
         
     def __add__(self, course):
         """magic method that adds points for a class for the week, course 
