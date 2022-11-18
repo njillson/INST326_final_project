@@ -29,12 +29,14 @@ class Assignment:
        
     def read_assignment(self, filepath):
         """uses with statement to open and read assignment file
-        will open file and use UTF8 encoding to sort through it"""
+        will open file and use UTF8 encoding to sort through it
+	** Madison Diamond"""
        
     def  assignment_counter (self, count = 0):
         """use of default parameter to count(int) how many assignments there are
         for each class for the week specific methods like counter +=1 will be 
         used
+	** Madison Diamond
         """
         
     def assignment_overview(self, assignment):
@@ -49,6 +51,7 @@ class Assignment:
         must be a valid time. Custom list sorting with a key function with 3 
         criteria, first by date, then by time, then by point value
         (being higher)
+	** Selina Liu
         """
         
     def late_assignment(self, assignment, due_date):
@@ -105,6 +108,7 @@ class Assignment:
         should be a dictionary with the course name as the key(str) and 
         assignment points as the values (int) assignment points can be 0, there 
         is no maximum for points, and there can be 0 assignments in the class
+	** Selina Liu
         """
         
 def parse_args(args):
