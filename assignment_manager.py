@@ -38,8 +38,10 @@ class Assignment:
         """
         
     def assignment_overview(self, assignment):
-        """prints to stdout with the use of an fstring a message in regards 
-        to the assignments"""
+        """uses f string "f”assignment {assignment.name} is due on {assignment.due} 
+        at {assignment.time} and is worth {assignment.points} points”" to give an overview of 
+        the assignment. shows the due date time, and point count.
+        Taylor Tran """  
         
     def sort_assignment(self, due_date, due _time, points):
         """A method that sorts assignments based due_date which is a str. 
@@ -50,11 +52,15 @@ class Assignment:
         """
         
     def late_assignment(self, assignment, due_date):
-        """uses conditional expression to print whether or not an assignment
-        will be late"""
+       """Syntax: ```Expression 1, if some condition, else expression 2```
+	    If date => 10:
+		print “assignment is late
+        Tells us if an assignment is past its due date. Checks to see if the assignment 
+        is over the date due, then returns a print statement. 
+        Taylor Tran"""" 
         
     def shared_tasks(self, other):
-    """Not sure if you want to incorporate into class but if so then person1 wil be self
+     """Not sure if you want to incorporate into class but if so then person1 wil be self
     takes two people objects/ task sets and compares the tasks using a set operation
     so that the shared tasks are listed (You get a companion!)
     **Maybe display their email at the end so that you can connect - could run this function through
@@ -76,7 +82,7 @@ class Assignment:
     """
     
     def visualize_priorities(Assignment, person):
-    """creates a bargraph with each task in an object's task list graphed against their priority level/ urgency
+     """creates a bargraph with each task in an object's task list graphed against their priority level/ urgency
     
     Args:
         person object
