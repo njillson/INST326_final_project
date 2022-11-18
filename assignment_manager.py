@@ -53,6 +53,47 @@ class Assignment:
         """uses conditional expression to print whether or not an assignment
         will be late"""
         
+    def shared_tasks(self, other):
+    """Not sure if you want to incorporate into class but if so then person1 wil be self
+    takes two people objects/ task sets and compares the tasks using a set operation
+    so that the shared tasks are listed (You get a companion!)
+    **Maybe display their email at the end so that you can connect - could run this function through
+    data base of people so that it gives you email and classes for every person that you match
+    tasks with
+
+    Args:
+        person1 (set): unordered list of all the activities person1 has in their object
+        person2 (set): unordered list of all the activities person2 has in their object
+
+    Returns:
+        rlist(set): list of activities/ tasks that the two people share
+    """
+    """
+    #will require additional code to build set from people(task) objects
+    tasks = {}
+    return self.tasks.intersection(other.tasks)
+    #or assignments on the same day
+    """
+    
+    def visualize_priorities(Assignment, person):
+    """creates a bargraph with each task in an object's task list graphed against their priority level/ urgency
+    
+    Args:
+        person object
+        
+    Side Effects:
+        seaborn bar plot is displayed"""
+
+    """
+    x = []
+    y = []
+    for task in person.tasks:
+        x.append(task)
+        y.append(person.get_priority(task))
+    data = {'task':x, 'priority':y}
+    sb.barplot(data, x= 'task', y = 'priority')
+    """
+        
     def __add__(self, course):
         """magic method that adds points for a class for the week, course 
         should be a dictionary with the course name as the key(str) and 
