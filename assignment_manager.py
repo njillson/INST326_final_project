@@ -13,10 +13,12 @@ class Assignment:
         """uses regex to parse through each line in the file and determine class, due date, due time, point value fore each assignment"""
        
     def read_assignment(self, filepath):
-        """uses with statement to open and read assignment file""""
+        """uses with statement to open and read assignment file
+        will open file and use UTF8 encoding to sort through it""""
        
     def  assignment_counter (self, count = 0):
-        """use of default parameter to count(int) how many assignments there are for each class for the week"""
+        """use of default parameter to count(int) how many assignments there are for each class for the week
+        specific methods like counter +=1 will be used"""
         
     def assignment_overview(self, assignment):
         """prints to the user with the use of an fstring a message in regards to the assignments"""
