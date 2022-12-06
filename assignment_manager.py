@@ -26,7 +26,31 @@ class Assignment:
         ** Plan to uses regex
         ** Natalie - RegEx
         """
-       
+	        regex = r"""(?xm)
+        ^(?P<Course>[A-Z]{4}\d{3}(?:\w?))
+        ,\s
+        (?P<AssignmentName>.*?)
+        ,\s
+        (?P<DueDate>\d{1,2}/\d{1,2}/\d{4})
+        ,\s
+        (?P<DueTime>\d{1,2}:\d{2}\s(?:am|pm))
+        ,\s
+        (?P<Points>\d*)
+        """
+    
+        match = re.search(regex, line)
+        if match == None:
+            raise ValueError('Your assignemnt information could not be parsed')
+        else:
+            self.assignment = line
+            self.course = match.group("Course")
+            self.name = match.group("AssignmentName")
+            self.duedate = match.group("DueDate")
+            self.duetime = match.group("DueTime")
+            self.points = match.group("Points")    
+
+
+
     def read_assignment(self, filepath):
         """uses with statement to open and read assignment file
         will open file and use UTF8 encoding to sort through it
