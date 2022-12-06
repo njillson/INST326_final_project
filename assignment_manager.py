@@ -26,7 +26,8 @@ class Assignment:
         ** Plan to uses regex
         ** Natalie - RegEx
         """
-	        regex = r"""(?xm)
+	
+	regex = r"""(?xm)
         ^(?P<Course>[A-Z]{4}\d{3}(?:\w?))
         ,\s
         (?P<AssignmentName>.*?)
