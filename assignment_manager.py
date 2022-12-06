@@ -31,13 +31,23 @@ class Assignment:
         """uses with statement to open and read assignment file
         will open file and use UTF8 encoding to sort through it
 	** Madison Diamond"""
+        with open(filepath, "r", encoding="utf-8") as f:
+            
+            
+            
        
-    def  assignment_counter (self, count = 0):
+    def  assignment_counter (self, counter = 0):
         """use of default parameter to count(int) how many assignments there are
         for each class for the week specific methods like counter +=1 will be 
         used
 	** Madison Diamond
         """
+        
+    counter = 0
+    
+    if counter >= 0:
+        counter = counter+1
+    print ("counter")
         
     def assignment_overview(self, assignment):
         """uses f string "f”assignment {assignment.name} is due on {assignment.due} 
