@@ -32,11 +32,13 @@ class Assignment:
         will open file and use UTF8 encoding to sort through it
 	** Madison Diamond"""
         with open(filepath, "r", encoding="utf-8") as f:
-            
+            for line in f:
+                assignment = line.split(",")
+                
             
             
        
-    def  assignment_counter (self, counter = 0):
+    def  assignment_counter (self, assignment_count):
         """use of default parameter to count(int) how many assignments there are
         for each class for the week specific methods like counter +=1 will be 
         used
@@ -45,7 +47,8 @@ class Assignment:
         
     counter = 0
     
-    if counter >= 0:
+    
+    if assignment_count >= 0:
         counter = counter+1
     print ("counter")
         
