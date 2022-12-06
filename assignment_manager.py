@@ -23,7 +23,6 @@ class Assignment:
             Initializes attributes: name, course, duedate, duetime,
             and points
         
-        ** Plan to uses regex
         ** Natalie - RegEx
         """
 	
