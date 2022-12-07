@@ -49,7 +49,7 @@ class Assignment:
         """
         
     
-        assignments = assignments (filepath)
+        assignments = read_assignment (filepath)
         for assignment in assignments:
             duedate = assignment.duedate
             if todays_date == duedate:
