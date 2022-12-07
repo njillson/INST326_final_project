@@ -83,14 +83,7 @@ class Assignment:
         and point value which is points (int).
     ** Taylor Tran """  
         
-    def sort_assignment(self, due_date, due _time, points):
-        """A method that sorts assignments based due_date which is a str. 
-        due date cannot be null, and date must be a valid date, due_time (str)
-        must be a valid time. Custom list sorting with a key function with 3 
-        criteria, first by date, then by time, then by point value
-        (being higher)
-	** Selina Liu
-        """
+
         
     def late_assignment(self, assignment, due_date):
        """Syntax: ```Expression 1, if some condition, else expression 2```
@@ -166,6 +159,7 @@ def sort_assignment(self, ass_list):
         	count = count + 1
         	name = item["name"]
         	print(f"{count}. {name}")
+		
 def parse_args(args):
     """ Parse command-line arguments.
     
