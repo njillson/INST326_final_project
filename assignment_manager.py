@@ -149,7 +149,23 @@ class Assignment:
         is no maximum for points, and there can be 0 assignments in the class
 	** Selina Liu
         """
-        
+	
+def sort_assignment(self, ass_list):
+        """A Function that sorts assignments based due_date which is a str. 
+        due date cannot be null, and date must be a valid date, due_time (str)
+        must be a valid time. Custom list sorting with a key function with 3 
+        criteria, first by date, then by time, then by point value
+        (being higher)
+	** Selina Liu
+        """
+	sort_points = sorted(ass_list, key = lambda d: (d["points"]), reverse = True)
+    	sorted_assignments = sorted(sort_points, key=lambda d: (d['Due Date'], d['Due Time']))
+   	 count = 0
+   	 print("Your assigments sorted are")
+    	for item in sorted_assignments:
+        	count = count + 1
+        	name = item["name"]
+        	print(f"{count}. {name}")
 def parse_args(args):
     """ Parse command-line arguments.
     
