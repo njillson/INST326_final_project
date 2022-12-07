@@ -2,6 +2,7 @@
 
 from argparse import ArgumentParser
 import sys
+import re
 
 class Assignment:
     """An assignment object
@@ -40,7 +41,7 @@ class Assignment:
     
         match = re.search(regex, line)
         if match == None:
-            raise ValueError('Your assignemnt information could not be parsed')
+            raise ValueError('Your assignment information could not be parsed')
         else:
             self.assignment = line
             self.course = match.group("Course")
