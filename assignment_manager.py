@@ -2,7 +2,6 @@
 
 from argparse import ArgumentParser
 import sys
-import re
 
 class Assignment:
     """An assignment object
@@ -24,58 +23,38 @@ class Assignment:
             Initializes attributes: name, course, duedate, duetime,
             and points
         
+        ** Plan to uses regex
         ** Natalie - RegEx
         """
-	
-	regex = r"""(?xm)
-        ^(?P<Course>[A-Z]{4}\d{3}(?:\w?))
-        ,\s
-        (?P<AssignmentName>.*?)
-        ,\s
-        (?P<DueDate>\d{1,2}/\d{1,2}/\d{4})
-        ,\s
-        (?P<DueTime>\d{1,2}:\d{2}\s(?:am|pm))
-        ,\s
-        (?P<Points>\d*)
-        """
-    
-        match = re.search(regex, line)
-        if match == None:
-            raise ValueError('Your assignment information could not be parsed')
-        else:
-            self.assignment = line
-            self.course = match.group("Course")
-            self.name = match.group("AssignmentName")
-            self.duedate = match.group("DueDate")
-            self.duetime = match.group("DueTime")
-            self.points = match.group("Points")    
-
-
-
-    def read_assignment(self, filepath):
+       
+    def read_assignment(filepath):
         """uses with statement to open and read assignment file
         will open file and use UTF8 encoding to sort through it
 	** Madison Diamond"""
+        
+        assignments = []
         with open(filepath, "r", encoding="utf-8") as f:
             for line in f:
-                assignment = line.split(",")
-                
+                assignment = Assignment(line.strip())
+                assignments.append(assignment)
+        return assignments
             
             
        
-    def  assignment_counter (self, assignment_count):
+    def assignment_counter(filepath, todays_date, counter = 0):
         """use of default parameter to count(int) how many assignments there are
         for each class for the week specific methods like counter +=1 will be 
         used
 	** Madison Diamond
         """
         
-    counter = 0
     
-    
-    if assignment_count >= 0:
-        counter = counter+1
-    print ("counter")
+        assignments = read_assignment(filepath)
+        for assignment in assignments:
+            duedate = assignment.duedate
+            if todays_date == duedate:
+                counter += 1
+        return counter
         
     def assignment_overview(self, assignment):
         """uses f string "f”assignment {assignment.name} is due on {assignment.due} 
@@ -84,7 +63,14 @@ class Assignment:
         and point value which is points (int).
     ** Taylor Tran """  
         
-
+    def sort_assignment(self, due_date, due _time, points):
+        """A method that sorts assignments based due_date which is a str. 
+        due date cannot be null, and date must be a valid date, due_time (str)
+        must be a valid time. Custom list sorting with a key function with 3 
+        criteria, first by date, then by time, then by point value
+        (being higher)
+	** Selina Liu
+        """
         
     def late_assignment(self, assignment, due_date):
        """Syntax: ```Expression 1, if some condition, else expression 2```
@@ -143,24 +129,7 @@ class Assignment:
         is no maximum for points, and there can be 0 assignments in the class
 	** Selina Liu
         """
-	
-def sort_assignment(self, ass_list):
-        """A Function that sorts assignments based due_date which is a str. 
-        due date cannot be null, and date must be a valid date, due_time (str)
-        must be a valid time. Custom list sorting with a key function with 3 
-        criteria, first by date, then by time, then by point value
-        (being higher)
-	** Selina Liu
-        """
-	sort_points = sorted(ass_list, key = lambda d: (d["points"]), reverse = True)
-    	sorted_assignments = sorted(sort_points, key=lambda d: (d['Due Date'], d['Due Time']))
-   	 count = 0
-   	 print("Your assigments sorted are")
-    	for item in sorted_assignments:
-        	count = count + 1
-        	name = item["name"]
-        	print(f"{count}. {name}")
-		
+        
 def parse_args(args):
     """ Parse command-line arguments.
     
