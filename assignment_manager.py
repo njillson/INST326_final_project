@@ -26,44 +26,90 @@ class Assignment:
         ** Plan to uses regex
         ** Natalie - RegEx
         """
-       
-    def read_assignment(filepath):
-        """uses with statement to open and read assignment file
-        will open file and use UTF8 encoding to sort through it
-	** Madison Diamond"""
+	regex = r"""(?xm)
+        ^(?P<Course>[A-Z]{4}\d{3}(?:\w?))
+        ,\s
+        (?P<AssignmentName>.*?)
+        ,\s
+        (?P<DueDate>\d{2}/\d{2}/\d{4})
+        ,\s
+        (?P<DueTime>\d{1,2}:\d{2}\s(?:am|pm))
+        ,\s
+        (?P<Points>\d*)
+        """
+
+        line = line.strip()
+        match = re.search(regex, line)
+        if match == None:
+		raise ValueError('Your assignment information could not be parsed')
+        else:
+            	self.assignment = line
+            	self.course = match.group("Course")
+            	self.name = match.group("AssignmentName")
+            	self.duedate = match.group("DueDate")
+            	self.duetime = match.group("DueTime")
+            	self.mil_time = self.military_time()
+            	self.points = int(match.group("Points"))
+            
+    def __repr__(self):
+	return (
+        	f"Course:      {self.course}\n"
+            	f"Name:        {self.name}\n"
+            	f"Due Date:    {self.duedate}\n"
+            	f"Due Time:    {self.duetime}\n"
+            	f"Points:      {self.points}\n"
+        	 )
         
-        assignments = []
-        with open(filepath, "r", encoding="utf-8") as f:
-            for line in f:
-                assignment = Assignment(line.strip())
-                assignments.append(assignment)
-        return assignments
+	
+    def military_time(self):
+	hour, minute = self.duetime.strip().split(":")   
+	if "pm" in minute:
+		hour = int(hour)
+		minute = int(minute.strip("pm"))  
+		hour = 12 + hour
+		if minute < 10:
+                	hour = hour * 10
+        else:
+		minute = int(minute.strip("am"))
+		if minute < 10:
+                	hour = 10 * int(hour)
+        
+        m_time = f"{hour}{minute}"
+        return int(m_time)
+    
+        
+def read_assignments(filepath):
+"""uses with statement to open and read assignment file
+   will open file and use UTF8 encoding to sort through it
+	** Madison Diamond"""
+	assignments = []
+   	with open(filepath, "r", encoding="utf-8") as f:
+       		assignments = [Assignment(line) for line in f]
+  	return (assignments)	
             
             
        
-    def assignment_counter(filepath, todays_date, counter = 0):
+def assignment_counter(filepath, todays_date, counter = 0):
         """use of default parameter to count(int) how many assignments there are
         for each class for the week specific methods like counter +=1 will be 
         used
 	** Madison Diamond
         """
-        
-    
-        assignments = read_assignment (filepath)
+	assignments = read_assignments(filepath)
         for assignment in assignments:
-            duedate = assignment.duedate
-            if todays_date == duedate:
-                counter += 1
+           	duedate = assignment.duedate
+           	if todays_date == duedate:
+               		counter += 1
         return counter
         
-    def assignment_overview(self, assignment):
+def assignment_overview(self, assignment):
         """uses f string "f”assignment {assignment.name} is due on {assignment.due} 
         at {assignment.time} and is worth {assignment.points} points”" to give an overview of 
         the assignment. This method needs the due date time which is due_time (str),
         and point value which is points (int).
     ** Taylor Tran """  
         
-    def late_assignment(self, assignment, due_date):
+def late_assignment(self, assignment, due_date):
        """Syntax: ```Expression 1, if some condition, else expression 2```
 	    If date => 10:
 		print “assignment is late
@@ -72,7 +118,7 @@ class Assignment:
         and needs due_date (str) and due_time (str). 
     **Taylor Tran"""" 
         
-    def shared_tasks(self, other):
+def shared_tasks(self, other):
      """Not sure if you want to incorporate into class but if so then person1 wil be self
     takes two people objects/ task sets and compares the tasks using a set operation
     so that the shared tasks are listed (You get a companion!)
@@ -94,7 +140,7 @@ class Assignment:
     #or assignments on the same day
     **david greenburg"""
     
-    def visualize_priorities(Assignment, person):
+def visualize_priorities(Assignment, person):
      """creates a bargraph with each task in an object's task list graphed against their priority level/ urgency
     
     Args:
@@ -113,35 +159,17 @@ class Assignment:
     sb.barplot(data, x= 'task', y = 'priority')
     ** david greenburg"""
         
-    def __add__(self, course):
-        """magic method that adds points for a class for the week, course 
-        should be a dictionary with the course name as the key(str) and 
-        assignment points as the values (int) assignment points can be 0, there 
-        is no maximum for points, and there can be 0 assignments in the class
-	** Selina Liu
-        """
-def military_time(time):
-    hour, minute = time.strip().split(":")   
-    hour = int(hour)
-    if "pm" in minute:
-        minute = int(minute.strip("pm"))
-        hour = 12 + hour
-    else:
-        minute = int(minute.strip("am"))
-    m_time = f"{hour}:{minute}"
-    return m_time
+
+
     
-def sort_assignment(ass_list):
-    for item in ass_list:
-        new_time = military_time(item["Due Time"])
-        item["Due Time"] = new_time
-    sort_points = sorted(ass_list, key = lambda d: (d["Points"]), reverse = True)
-    sorted_assignments = sorted(sort_points, key=lambda d: (d['Due Date'], d['Due Time']))
-    count = 0
-    print("Your assigments sorted are")
-    for item in sorted_assignments:
-        count = count + 1
-        name = item["Name"]
+def sort_assignments(asgn_list):
+	assignments = assgn_list.copy()
+	assignments.sort(key = lambda a: (a.duedate, a.mil_time, -(a.points)))
+	count = 0
+	print("To Do List:")
+	for item in assignments:
+        	count = count + 1
+        	name = item.name
         print(f"{count}. {name}")
 	
 def parse_args(args):
@@ -159,7 +187,7 @@ def parse_args(args):
     """
 
 if __name__ == "__main__":
-    args = parse_args(sys.argv[1:])
-    for assignment in read_assignment(args.file):
-        print(f"{assignment!r}\n")
+   	args = parse_args(sys.argv[1:])
+   	for assignment in read_assignment(args.file):
+       		print(f"{assignment!r}\n")
     
