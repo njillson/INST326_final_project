@@ -63,15 +63,6 @@ class Assignment:
         and point value which is points (int).
     ** Taylor Tran """  
         
-    def sort_assignment(self, due_date, due _time, points):
-        """A method that sorts assignments based due_date which is a str. 
-        due date cannot be null, and date must be a valid date, due_time (str)
-        must be a valid time. Custom list sorting with a key function with 3 
-        criteria, first by date, then by time, then by point value
-        (being higher)
-	** Selina Liu
-        """
-        
     def late_assignment(self, assignment, due_date):
        """Syntax: ```Expression 1, if some condition, else expression 2```
 	    If date => 10:
@@ -129,7 +120,30 @@ class Assignment:
         is no maximum for points, and there can be 0 assignments in the class
 	** Selina Liu
         """
-        
+def military_time(time):
+    hour, minute = time.strip().split(":")   
+    hour = int(hour)
+    if "pm" in minute:
+        minute = int(minute.strip("pm"))
+        hour = 12 + hour
+    else:
+        minute = int(minute.strip("am"))
+    m_time = f"{hour}:{minute}"
+    return m_time
+    
+def sort_assignment(ass_list):
+    for item in ass_list:
+        new_time = military_time(item["Due Time"])
+        item["Due Time"] = new_time
+    sort_points = sorted(ass_list, key = lambda d: (d["Points"]), reverse = True)
+    sorted_assignments = sorted(sort_points, key=lambda d: (d['Due Date'], d['Due Time']))
+    count = 0
+    print("Your assigments sorted are")
+    for item in sorted_assignments:
+        count = count + 1
+        name = item["Name"]
+        print(f"{count}. {name}")
+	
 def parse_args(args):
     """ Parse command-line arguments.
     
@@ -143,6 +157,7 @@ def parse_args(args):
             
     ** Natalie - ArgumentParser
     """
+
 if __name__ == "__main__":
     args = parse_args(sys.argv[1:])
     for assignment in read_assignment(args.file):
