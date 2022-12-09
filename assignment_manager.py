@@ -128,13 +128,22 @@ def late_assignment(assignment):
 	#current
 	cur_date, cur_time = str(datetime.now()).split(" ")
 	year, month, day = cur_date.split("-")
+	year = int(year)
+	month = int(month)
+	day = int(day)
+	
 	#already in military time
 	hour, minute, seconds = cur_time.split(":")
+	hour = int(hour)
+	minute = int(minute)
 	
 	due_m, due_d, due_y = str(assignment.duedate).split("/")
-	due_mtime = assignment.mil_time
-	due_hour = due_mtime[:2]
-	due_minute = due_mtime[2:]
+	due_m = int(due_m)
+	due_d = int(due_d)
+	due_y = int(due_y)
+	due_mtime = str(assignment.mil_time)
+	due_hour = int(due_mtime[:2])
+	due_minute = int(due_mtime[2:])
 	
 	
 	late = False
