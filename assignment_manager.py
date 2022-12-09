@@ -3,6 +3,7 @@
 from argparse import ArgumentParser
 import sys
 from datetime import datetime
+import re
 
 class Assignment:
     """An assignment object
