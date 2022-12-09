@@ -242,6 +242,10 @@ def parse_args(args):
     Returns:
         namespace: an object with one attribute, file, containing a string.
             
+    parser = ArgumentParser()
+    parser.add_argument("file", help="file containing the details of one assignment per line")
+    return parser.parse_args(arglist)
+    
     ** Natalie - ArgumentParser
     """
 
