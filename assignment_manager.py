@@ -2,6 +2,7 @@
 
 from argparse import ArgumentParser
 import sys
+from datetime import datetime
 
 class Assignment:
     """An assignment object
@@ -58,7 +59,7 @@ class Assignment:
             	f"Due Date:    {self.duedate}\n"
             	f"Due Time:    {self.duetime}\n"
             	f"Points:      {self.points}\n"
-        	 )
+       	)
         
 	
     def military_time(self):
@@ -102,21 +103,70 @@ def assignment_counter(filepath, todays_date, counter = 0):
                		counter += 1
         return counter
         
-def assignment_overview(self, assignment):
-        """uses f string "f”assignment {assignment.name} is due on {assignment.due} 
-        at {assignment.time} and is worth {assignment.points} points”" to give an overview of 
-        the assignment. This method needs the due date time which is due_time (str),
-        and point value which is points (int).
-    ** Taylor Tran """  
+def assignment_overview(assignment):
+        """uses f-string to give an overview of the assignment. Accesses state of the assignment object passed in
+	Args:
+		assignment (Assignment): Assignment object that the overview will be given of
+	Returns:
+		(str) an overview of the assignment
+    	** Taylor Tran 
+    	""" 
+	return f"Assignment {assignment.name} is due on {assignment.due} at {assignment.time} and is worth {assignment.points} points” 
         
-def late_assignment(self, assignment, due_date):
-       """Syntax: ```Expression 1, if some condition, else expression 2```
-	    If date => 10:
-		print “assignment is late
-        Tells us if an assignment is past its due date. Checks to see if the assignment 
-        is over the date due, then returns a print statement. Needs assignment_name (str)
-        and needs due_date (str) and due_time (str). 
-    **Taylor Tran"""" 
+def late_assignment(assignment):
+       """Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
+        is over the date due using conditional statemetns, then prints a string to the console suggesting appropriate action. 
+	Print statement includes ballpark of how long until asssignment is due. Requires that a reference to an Assignment instance is passed.
+	Args:
+		assignment(Assignment instance): accesses state of assignment object to us due data, due time, and name in logic.
+	Side Effects:
+		prints a string to the console an encouraging statement including the assignment's name and roughly how long there is to complete it,
+		unless it is overdue.
+	Returns:
+		(boolean): returns whether the assignment is late (True) or not (False)
+    	**Taylor Tran"""" 
+	#current
+	cur_date, cur_time = str(datetime.now()).split(" ")
+	year, month, day = cur_date.split("-")
+	#already in military time
+	hour, minute, seconds = cur_time.split(":")
+	
+	due_m, due_d, due_y = str(assignment.duedate).split("/")
+	due_mtime = assignment.mil_time
+	due_hour = due_mtime[:2]
+	due_minute = due_mtime[2:]
+	
+	
+	late = False
+	
+	if(year > due_y):
+		late = True
+	elif(year == due_y):
+		if(month > due_m):
+			late = True
+		elif(month == due_m):
+			if(day > due_d):
+				late = True
+			elif(day == due_d):
+				if(hour>due_hour):
+					late = True
+				elif(hour == due_hour):
+					if(minute >= due_minute):
+						late = True
+					else:
+						print(f"GET GOING! You only have {due_minute-minute} minutes left!")
+				else:
+					print(f"You should probably start working. You only have {due_hour - hour} hours left before {assignment.name} is due")
+			else:
+				print(f"You have {due_d-day} days to complete {assignment.name}. Do with that what you will.")
+		else:
+			print(f"I wouldn't stress. You have {due_m - month} months to complete {assignmnet.name}.")
+	else:
+		print(f"Why is this even on your schedule?! You have {due_y - year} years to complete {assignment.name}.")
+	if(late):
+		print(f"You're assignment, {assignment.name}, is overdue...")
+	return late
+					
         
 def shared_tasks(self, other):
      """Not sure if you want to incorporate into class but if so then person1 wil be self
