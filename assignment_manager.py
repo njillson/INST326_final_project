@@ -235,7 +235,7 @@ def sort_assignments(asgn_list):
 def parse_args(args):
     """ Parse command-line arguments.
     
-    Expect one mandatory argument, the path to a file of addresses.
+    Expect one mandatory argument, the path to a file of assignments.
     
     Args:
         arglist (list of str): command-line arguments.
