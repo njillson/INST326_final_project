@@ -134,9 +134,14 @@ def assignment_overview(assignment):
 	Returns:
 		(str) an overview of the assignment
     	** Taylor Tran """ 
-    return f"Assignment {Assignment.name} is due on {Assignment.due} at {Assignment.time} and is worth {Assignment.points} points"
-
-
+    assignments = read_assignments(filepath)
+    somecourse = input ("What course would you like to look at?")
+    courseassignments = []
+    for assignment in assignments:
+        if assignment.course == somecourse:
+            courseassignments.append(f"""{assignment.name} is due on {assignment.duedate} 
+            at {assignment.duetime} and is worth {assignment.points} points""")
+    return courseassignments
         
 def late_assignment(assignment, output = True):
 	"""Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
