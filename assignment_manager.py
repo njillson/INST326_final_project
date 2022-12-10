@@ -171,11 +171,11 @@ def late_assignment(assignment, output = True):
 			else:
 				message = f"You have {due_d-day} days to complete {assignment.name}. Do with that what you will."
 		else:
-			message = f"I wouldn't stress. You have {due_m - month} months to complete {assignmnet.name}."
+			message = f"I wouldn't stress. You have {due_m - month} months to complete {assignment.name}."
 	else:
 		message = f"Why is this even on your schedule?! You have {due_y - year} years to complete {assignment.name}."
 	if(late):
-		message = f"You're assignment, {assignment.name}, is overdue..."
+		message = f"Youre assignment, {assignment.name}, is overdue..."
 	if(output):
 		print(message)
 	return late				
@@ -251,7 +251,7 @@ def sort_assignments(asgn_list):
         name = item.name
         print(f"{count}. {name}")
 	
-def parse_args(args):
+def parse_args(arglist):
     """ Parse command-line arguments.
     
     Expect one mandatory argument, the path to a file of assignments.
@@ -261,13 +261,12 @@ def parse_args(args):
     
     Returns:
         namespace: an object with one attribute, file, containing a string.
-            
+        
+    ** Natalie - ArgumentParser
+    """        
     parser = ArgumentParser()
     parser.add_argument("file", help="file containing the details of one assignment per line")
     return parser.parse_args(arglist)
-    
-    ** Natalie - ArgumentParser
-    """
 
 if __name__ == "__main__":
     args = parse_args(sys.argv[1:])
