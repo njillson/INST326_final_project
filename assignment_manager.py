@@ -82,7 +82,7 @@ class Assignment:
 
     
         
-def read_assignments(filepath):
+def read_assignment(filepath):
     """uses with statement to open and read assignment file
    will open file and use UTF8 encoding to sort through it
 	** Madison Diamond"""
@@ -100,7 +100,7 @@ def assignment_counter(filepath, counter = 0):
     for each class for the week specific methods like counter +=1 will be 
     used
 	** Madison Diamond"""
-    assignments = read_assignment (filepath)
+    assignments = read_assignment(filepath)
     todays_date = input ("What date would you like to look at? Please insert in MM/DD/YYYY format:")
     
     
@@ -124,8 +124,8 @@ def assignment_counter(filepath, counter = 0):
     if counter == 0:
         print (f"You have 0 assignments due on {todays_date}.")
     if counter != 0:
-        print (f"You have {counter} assignments due on {todays date}. The are:")
-        return todays_assignment 
+        print (f"You have {counter} assignments due on {todays_date}. The are:")
+        return todays_assignments 
         
 def assignment_overview(assignment):
     """uses f-string to give an overview of the assignment. Accesses state of the assignment object passed in
