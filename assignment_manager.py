@@ -30,7 +30,7 @@ class Assignment:
         ** Plan to uses regex
         ** Natalie - RegEx
         """
-	regex = r"""(?xm)
+        regex = r"""(?xm)
         ^(?P<Course>[A-Z]{4}\d{3}(?:\w?))
         ,\s
         (?P<AssignmentName>.*?)
@@ -45,79 +45,78 @@ class Assignment:
         line = line.strip()
         match = re.search(regex, line)
         if match == None:
-		raise ValueError('Your assignment information could not be parsed')
+            raise ValueError('Your assignment information could not be parsed')
         else:
-            	self.assignment = line
-            	self.course = match.group("Course")
-            	self.name = match.group("AssignmentName")
-            	self.duedate = match.group("DueDate")
-            	self.duetime = match.group("DueTime")
-            	self.mil_time = self.military_time()
-            	self.points = int(match.group("Points"))
+            self.assignment = line
+            self.course = match.group("Course")
+            self.name = match.group("AssignmentName")
+            self.duedate = match.group("DueDate")
+            self.duetime = match.group("DueTime")
+            self.mil_time = self.military_time()
+            self.points = int(match.group("Points"))
             
     def __repr__(self):
-	return (
+        return (
         	f"Course:      {self.course}\n"
             	f"Name:        {self.name}\n"
             	f"Due Date:    {self.duedate}\n"
             	f"Due Time:    {self.duetime}\n"
             	f"Points:      {self.points}\n"
        	)
-        
-	
+    
     def military_time(self):
-	hour, minute = self.duetime.strip().split(":")   
-	if "pm" in minute:
-		hour = int(hour)
-		minute = int(minute.strip("pm"))  
-		hour = 12 + hour
-		if minute < 10:
-                	hour = hour * 10
+        hour, minute = self.duetime.strip().split(":")   
+        if "pm" in minute:
+            hour = int(hour)
+            minute = int(minute.strip("pm"))  
+            hour = 12 + hour
+            if minute < 10:
+                hour = hour * 10
         else:
-		minute = int(minute.strip("am"))
-		if minute < 10:
-                	hour = 10 * int(hour)
+            minute = int(minute.strip("am"))
+            if minute < 10:
+                hour = 10 * int(hour)
         
         m_time = f"{hour}{minute}"
         return int(m_time)
+
     
         
 def read_assignments(filepath):
-"""uses with statement to open and read assignment file
+    """uses with statement to open and read assignment file
    will open file and use UTF8 encoding to sort through it
 	** Madison Diamond"""
-	assignments = []
-   	with open(filepath, "r", encoding="utf-8") as f:
-       		assignments = [Assignment(line) for line in f]
-  	return (assignments)	
+    with open(filepath, "r", encoding = "utf-8") as f:
+        assignments = [Assignment(line) for line in f]
+    return (assignments)
             
             
        
 def assignment_counter(filepath, todays_date, counter = 0):
-        """use of default parameter to count(int) how many assignments there are
-        for each class for the week specific methods like counter +=1 will be 
-        used
-	** Madison Diamond
-        """
-	assignments = read_assignments(filepath)
-        for assignment in assignments:
-           	duedate = assignment.duedate
-           	if todays_date == duedate:
-               		counter += 1
-        return counter
+    """use of default parameter to count(int) how many assignments there are
+    for each class for the week specific methods like counter +=1 will be 
+    used
+	** Madison Diamond"""
+    assignments = read_assignments(filepath)
+    for assignment in assignments:
+        duedate = assignment.duedate
+        if todays_date == duedate:
+            counter += 1
+    return counter
         
 def assignment_overview(assignment):
-        """uses f-string to give an overview of the assignment. Accesses state of the assignment object passed in
+    """uses f-string to give an overview of the assignment. Accesses state of the assignment object passed in
 	Args:
 		assignment (Assignment): Assignment object that the overview will be given of
 	Returns:
 		(str) an overview of the assignment
-    	** Taylor Tran 
-    	""" 
-	return f"Assignment {assignment.name} is due on {assignment.due} at {assignment.time} and is worth {assignment.points} points” 
+    	** Taylor Tran """ 
+    return f"Assignment {Assignment.name} is due on {Assignment.due} at {Assignment.time} and is worth {Assignment.points} points"
+
+
         
 def late_assignment(assignment, output = True):
-       """Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
+	"""Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
         is over the date due using conditional statemetns, then prints a string to the console suggesting appropriate action. 
 	Print statement includes ballpark of how long until asssignment is due. Requires that a reference to an Assignment instance is passed.
 	Args:
@@ -128,8 +127,7 @@ def late_assignment(assignment, output = True):
 		unless it is overdue.
 	Returns:
 		(boolean): returns whether the assignment is late (True) or not (False)
-    	**Taylor Tran"""
-	#current
+    	***Taylor Tran"""
 	cur_date, cur_time = str(datetime.now()).split(" ")
 	year, month, day = cur_date.split("-")
 	year = int(year)
@@ -180,13 +178,11 @@ def late_assignment(assignment, output = True):
 		message = f"You're assignment, {assignment.name}, is overdue..."
 	if(output):
 		print(message)
-	return late
-					
-        
-def classes_with_work(filename):
-     """Takes text file of assignments where each line satisfies intialization of Assignment class. Reads through all assignments and returns a set of all the
-     classes that still have work upcoming (not late). Uses error handling.
+	return late				
 
+def classes_with_work(filename):
+    """Takes text file of assignments where each line satisfies intialization of Assignment class. Reads through all assignments and returns a set of all the
+     classes that still have work upcoming (not late). Uses error handling.
     Args:
     	filename (str): relative or absolute path to a text file of assignments where each line satisfies intialization of Assignment class
     Side Effects:
@@ -194,44 +190,43 @@ def classes_with_work(filename):
 	(output) exceptions print to console
 	
     Returns:
-       (set): classes with work upcoming
-   """
-	classes = set()
-	try:
-		with open(filename, 'r', encoding = 'UTF-8'):
-			for line in file:
-				try:
-					temp_set = set()
-					temp_line = line.replace('\n','')
-					cur = Assignment(temp_line)
-					if(not(late_assignment(cur, False))):
-						temp_set.add(cur.course)
-				except Exception as e:
-					print(e)
-				else:
-					classes = classes | temp_set	
-	except:
-		print("Something went wrong with opening the file.")
-	return classes
+       (set): classes with work upcoming"""
+    classes = set()
+    try:
+        with open(filename, 'r', encoding = 'UTF-8') as f:
+            for line in f:
+                try:
+                    temp_set = set()
+                    temp_line = line.replace('\n', '')
+                    cur = Assignment(temp_line)
+                    if(not(late_assignment(cur, False))):
+                        temp_set.add(cur.course)
+                except Exception as e:
+                    print(e)
+                else:
+                    classes = classes | temp_set
+    except:
+        print("Something went wrong with opening the file")
+    return classes
     
 def visualize_priorities(filename):
-     """Creates a bargraph to compare/visualize the relative importance of assignments according to their point levels. Only considers upcoming assignments.
-    
-     Args:
-    	filename (str): relative or absolute path to a text file of assignments where each line satisfies intialization of Assignment class
-   
-     Side Effects:
+	"""Creates a bargraph to compare/visualize the relative importance of assignments according to their point levels. Only considers upcoming assignments.
+
+	Args:
+		filename (str): relative or absolute path to a text file of assignments where each line satisfies intialization of Assignment class
+	 Side Effects:
     	(junk) creates instances of Assignment class
-	(output) displays seaborn bar graph
-    ** david greenburg"""
-	dict = {
+		(output) displays seaborn bar graph
+		***David Greenburg
+	"""    
+	assignment_points = {
 		"Assignment" : [],
 		"Point Value" : []
-	}
-	df = pd.DataFrame(dict)
+  		}
+	df = pd.DataFrame(assignment_points)
 	try:
-		with open(filename, 'r', encoding = 'UTF-8'):
-			for line in file:
+		with open(filename, 'r', encoding = 'UTF-8') as f:
+			for line in f:
 				try:
 					temp_line = line.replace('\n','')
 					cur = Assignment(temp_line)
@@ -245,17 +240,15 @@ def visualize_priorities(filename):
 	else:
 		sns.barplot(data = df, x = "Assignment", y = "Point Value")
         
-
-
-    
+           
 def sort_assignments(asgn_list):
-	assignments = assgn_list.copy()
-	assignments.sort(key = lambda a: (a.duedate, a.mil_time, -(a.points)))
-	count = 0
-	print("To Do List:")
-	for item in assignments:
-        	count = count + 1
-        	name = item.name
+    assignments = asgn_list.copy()
+    assignments.sort(key = lambda a: (a.duedate, a.mil_time, -(a.points)))
+    count = 0
+    print("To Do List:")
+    for item in assignments:
+        count = count + 1
+        name = item.name
         print(f"{count}. {name}")
 	
 def parse_args(args):
@@ -277,7 +270,7 @@ def parse_args(args):
     """
 
 if __name__ == "__main__":
-   	args = parse_args(sys.argv[1:])
-   	for assignment in read_assignment(args.file):
+    args = parse_args(sys.argv[1:])
+    for assignment in read_assignments(args.file):
        		print(f"{assignment!r}\n")
     
