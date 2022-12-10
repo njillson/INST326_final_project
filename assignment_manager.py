@@ -52,8 +52,9 @@ class Assignment:
             self.name = match.group("AssignmentName")
             self.duedate = match.group("DueDate")
             self.duetime = match.group("DueTime")
-            self.mil_time = self.military_time()
             self.points = int(match.group("Points"))
+            self.late_assign = self.late_assignment()
+            self.mil_time = self.military_time()
             
     def __repr__(self):
         return (
@@ -79,10 +80,72 @@ class Assignment:
         
         m_time = f"{hour}{minute}"
         return int(m_time)
+    
+    def late_assignment(self):
+        """Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
+        is over the date due using conditional statemetns, then prints a string to the console suggesting appropriate action. 
+	Print statement includes ballpark of how long until asssignment is due. Requires that a reference to an Assignment instance is passed.
+	Args:
+		assignment(Assignment instance): accesses state of assignment object to us due data, due time, and name in logic.
+		output(boolean): whether to supress console output. Default is true (prints to console).
+	Side Effects:
+		prints a string to the console an encouraging statement including the assignment's name and roughly how long there is to complete it,
+		unless it is overdue.
+	Returns:
+		(boolean): returns whether the assignment is late (True) or not (False)
+    	***Taylor Tran"""
+        cur_date, cur_time = str(datetime.now()).split(" ")
+        year, month, day = cur_date.split("-")
+        year = int(year)
+        month = int(month)
+        day = int(day)
+        
+        hour, minute, seconds = cur_time.split(":")
+        hour = int(hour)
+        minute = int(minute)
+        
+        due_m, due_d, due_y = str(self.duedate).split("/")
+        due_m = int(due_m)
+        due_d = int(due_d)
+        due_y = int(due_y)
+        due_mtime = str(self.mil_time)
+        due_hour = int(due_mtime[:2])
+        due_minute = int(due_mtime[2:])
+        
+        late = False
+        
+        if(year > due_y):
+            late = True
+        elif(year == due_y):
+            if(month > due_m):
+                late = True
+            elif(month == due_m):
+                if(day > due_d):
+                    late = True
+                elif(day == due_d):
+                    if(hour>due_hour):
+                        late = True
+                    elif(hour == due_hour):
+                        if(minute >= due_minute):
+                            late = True
+                        else:
+                            message = f"GET GOING! You only have {due_minute-minute} minutes left!"
+                    else:
+                        message = f"You should probably start working. You only have {due_hour - hour} hours left before {self.name} is due"
+                else:
+                    message = f"You have {due_d-day} days to complete {self.name}. Do with that what you will."
+            else:
+                message = f"I wouldn't stress. You have {due_m - month} months to complete {self.name}."
+        else:
+            message = f"Why is this even on your schedule?! You have {due_y - year} years to complete {self.name}."
+        if(late):
+            message = f"You're assignment, {self.name}, is overdue..."
+        return (message)
+
 
     
         
-def read_assignment(filepath):
+def read_assignments(filepath):
     """uses with statement to open and read assignment file
    will open file and use UTF8 encoding to sort through it
 	** Madison Diamond"""
@@ -142,71 +205,8 @@ def assignment_overview(assignment):
             courseassignments.append(f"""{assignment.name} is due on {assignment.duedate} 
             at {assignment.duetime} and is worth {assignment.points} points""")
     return courseassignments
-        
-def late_assignment(assignment, output = True):
-	"""Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
-        is over the date due using conditional statemetns, then prints a string to the console suggesting appropriate action. 
-	Print statement includes ballpark of how long until asssignment is due. Requires that a reference to an Assignment instance is passed.
-	Args:
-		assignment(Assignment instance): accesses state of assignment object to us due data, due time, and name in logic.
-		output(boolean): whether to supress console output. Default is true (prints to console).
-	Side Effects:
-		prints a string to the console an encouraging statement including the assignment's name and roughly how long there is to complete it,
-		unless it is overdue.
-	Returns:
-		(boolean): returns whether the assignment is late (True) or not (False)
-    	***Taylor Tran"""
-	cur_date, cur_time = str(datetime.now()).split(" ")
-	year, month, day = cur_date.split("-")
-	year = int(year)
-	month = int(month)
-	day = int(day)
-	
-	#already in military time
-	hour, minute, seconds = cur_time.split(":")
-	hour = int(hour)
-	minute = int(minute)
-	
-	due_m, due_d, due_y = str(assignment.duedate).split("/")
-	due_m = int(due_m)
-	due_d = int(due_d)
-	due_y = int(due_y)
-	due_mtime = str(assignment.mil_time)
-	due_hour = int(due_mtime[:2])
-	due_minute = int(due_mtime[2:])
-	
-	
-	late = False
-	
-	if(year > due_y):
-		late = True
-	elif(year == due_y):
-		if(month > due_m):
-			late = True
-		elif(month == due_m):
-			if(day > due_d):
-				late = True
-			elif(day == due_d):
-				if(hour>due_hour):
-					late = True
-				elif(hour == due_hour):
-					if(minute >= due_minute):
-						late = True
-					else:
-						message = f"GET GOING! You only have {due_minute-minute} minutes left!"
-				else:
-					message = f"You should probably start working. You only have {due_hour - hour} hours left before {assignment.name} is due"
-			else:
-				message = f"You have {due_d-day} days to complete {assignment.name}. Do with that what you will."
-		else:
-			message = f"I wouldn't stress. You have {due_m - month} months to complete {assignment.name}."
-	else:
-		message = f"Why is this even on your schedule?! You have {due_y - year} years to complete {assignment.name}."
-	if(late):
-		message = f"Youre assignment, {assignment.name}, is overdue..."
-	if(output):
-		print(message)
-	return late				
+
+
 
 def classes_with_work(filename):
     """Takes text file of assignments where each line satisfies intialization of Assignment class. Reads through all assignments and returns a set of all the
@@ -278,6 +278,13 @@ def sort_assignments(asgn_list):
         count = count + 1
         name = item.name
         print(f"{count}. {name}")
+
+def late(assignment, assgnlist):
+    """To run late assignment method"""
+    alist = assgnlist.copy()
+    for item in alist:
+        if item.name == assignment:
+            return(item.late_assignment)
 	
 def parse_args(arglist):
     """ Parse command-line arguments.
