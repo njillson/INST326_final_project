@@ -128,7 +128,7 @@ def late_assignment(assignment, output = True):
 		unless it is overdue.
 	Returns:
 		(boolean): returns whether the assignment is late (True) or not (False)
-    	**Taylor Tran"""" 
+    	**Taylor Tran"""
 	#current
 	cur_date, cur_time = str(datetime.now()).split(" ")
 	year, month, day = cur_date.split("-")
