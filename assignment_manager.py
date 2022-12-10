@@ -4,6 +4,8 @@ from argparse import ArgumentParser
 import sys
 from datetime import datetime
 import re
+import seaborn as sns
+import pandas as pd
 
 class Assignment:
     """An assignment object
@@ -114,12 +116,13 @@ def assignment_overview(assignment):
     	""" 
 	return f"Assignment {assignment.name} is due on {assignment.due} at {assignment.time} and is worth {assignment.points} points” 
         
-def late_assignment(assignment):
+def late_assignment(assignment, output = True):
        """Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
         is over the date due using conditional statemetns, then prints a string to the console suggesting appropriate action. 
 	Print statement includes ballpark of how long until asssignment is due. Requires that a reference to an Assignment instance is passed.
 	Args:
 		assignment(Assignment instance): accesses state of assignment object to us due data, due time, and name in logic.
+		output(boolean): whether to supress console output. Default is true (prints to console).
 	Side Effects:
 		prints a string to the console an encouraging statement including the assignment's name and roughly how long there is to complete it,
 		unless it is overdue.
@@ -164,60 +167,83 @@ def late_assignment(assignment):
 					if(minute >= due_minute):
 						late = True
 					else:
-						print(f"GET GOING! You only have {due_minute-minute} minutes left!")
+						message = f"GET GOING! You only have {due_minute-minute} minutes left!"
 				else:
-					print(f"You should probably start working. You only have {due_hour - hour} hours left before {assignment.name} is due")
+					message = f"You should probably start working. You only have {due_hour - hour} hours left before {assignment.name} is due"
 			else:
-				print(f"You have {due_d-day} days to complete {assignment.name}. Do with that what you will.")
+				message = f"You have {due_d-day} days to complete {assignment.name}. Do with that what you will."
 		else:
-			print(f"I wouldn't stress. You have {due_m - month} months to complete {assignmnet.name}.")
+			message = f"I wouldn't stress. You have {due_m - month} months to complete {assignmnet.name}."
 	else:
-		print(f"Why is this even on your schedule?! You have {due_y - year} years to complete {assignment.name}.")
+		message = f"Why is this even on your schedule?! You have {due_y - year} years to complete {assignment.name}."
 	if(late):
-		print(f"You're assignment, {assignment.name}, is overdue...")
+		message = f"You're assignment, {assignment.name}, is overdue..."
+	if(output):
+		print(message)
 	return late
 					
         
-def shared_tasks(self, other):
-     """Not sure if you want to incorporate into class but if so then person1 wil be self
-    takes two people objects/ task sets and compares the tasks using a set operation
-    so that the shared tasks are listed (You get a companion!)
-    **Maybe display their email at the end so that you can connect - could run this function through
-    data base of people so that it gives you email and classes for every person that you match
-    tasks with
+def classes_with_work(filename):
+     """Takes text file of assignments where each line satisfies intialization of Assignment class. Reads through all assignments and returns a set of all the
+     classes that still have work upcoming (not late). Uses error handling.
 
     Args:
-        person1 (set): unordered list of all the activities person1 has in their object
-        person2 (set): unordered list of all the activities person2 has in their object
-
-    Returns:
-        rlist(set): list of activities/ tasks that the two people share
-    """
-    """
-    #will require additional code to build set from people(task) objects
-    tasks = {}
-    return self.tasks.intersection(other.tasks)
-    #or assignments on the same day
-    **david greenburg"""
-    
-def visualize_priorities(Assignment, person):
-     """creates a bargraph with each task in an object's task list graphed against their priority level/ urgency
-    
-    Args:
-        person object
-        
+    	filename (str): relative or absolute path to a text file of assignments where each line satisfies intialization of Assignment class
     Side Effects:
-        seaborn bar plot is displayed"""
-
-    """
-    x = []
-    y = []
-    for task in person.tasks:
-        x.append(task)
-        y.append(person.get_priority(task))
-    data = {'task':x, 'priority':y}
-    sb.barplot(data, x= 'task', y = 'priority')
+    	(junk) creates instances of Assignment class
+	(output) exceptions print to console
+	
+    Returns:
+       (set): classes with work upcoming
+   """
+	classes = set()
+	try:
+		with open(filename, 'r', encoding = 'UTF-8'):
+			for line in file:
+				try:
+					temp_set = set()
+					temp_line = line.replace('\n','')
+					cur = Assignment(temp_line)
+					if(not(late_assignment(cur, False))):
+						temp_set.add(cur.course)
+				except Exception as e:
+					print(e)
+				else:
+					classes = classes | temp_set	
+	except:
+		print("Something went wrong with opening the file.")
+	return classes
+    
+def visualize_priorities(filename):
+     """Creates a bargraph to compare/visualize the relative importance of assignments according to their point levels. Only considers upcoming assignments.
+    
+     Args:
+    	filename (str): relative or absolute path to a text file of assignments where each line satisfies intialization of Assignment class
+   
+     Side Effects:
+    	(junk) creates instances of Assignment class
+	(output) displays seaborn bar graph
     ** david greenburg"""
+	dict = {
+		"Assignment" : [],
+		"Point Value" : []
+	}
+	df = pd.DataFrame(dict)
+	try:
+		with open(filename, 'r', encoding = 'UTF-8'):
+			for line in file:
+				try:
+					temp_line = line.replace('\n','')
+					cur = Assignment(temp_line)
+					if(not(late_assignment(cur, False))):
+						temp = {"Assignment" : cur.name, "Point Value" : cur.points}
+						df = df.append(temp, ignore_index = True)
+				except Exception as e:
+					print(e)
+	except:
+		print("Something went wrong with opening the file.")
+	else:
+		sns.barplot(data = df, x = "Assignment", y = "Point Value")
         
 
 
