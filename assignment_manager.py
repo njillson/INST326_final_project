@@ -86,9 +86,12 @@ def read_assignments(filepath):
     """uses with statement to open and read assignment file
    will open file and use UTF8 encoding to sort through it
 	** Madison Diamond"""
+    assignments = []
     with open(filepath, "r", encoding = "utf-8") as f:
-        assignments = [Assignment(line) for line in f]
-    return (assignments)
+        for line in f:
+            assignment = Assignment(line.strip())
+            assignments.append(assignment)
+    return assignments
             
             
        
