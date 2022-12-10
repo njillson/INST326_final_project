@@ -95,17 +95,37 @@ def read_assignments(filepath):
             
             
        
-def assignment_counter(filepath, todays_date, counter = 0):
+def assignment_counter(filepath, counter = 0):
     """use of default parameter to count(int) how many assignments there are
     for each class for the week specific methods like counter +=1 will be 
     used
 	** Madison Diamond"""
-    assignments = read_assignments(filepath)
+    assignments = read_assignment (filepath)
+    todays_date = input ("What date would you like to look at? Please insert in MM/DD/YYYY format:")
+    
+    
+    dateregex = r"""(?xm)
+    (?P<Month> \d{2})
+    \
+    (?P<Day>\d{2})
+    \
+    (?P<Year>\d{4})"""
+    matchdate = re. search (dateregex, todays_date)
+    if matchdate == None:
+        raise ValueError('Not a valid date. Please make sure you entered the date in MM/DD/YYYY format.')
+    if int (matchdate.group ("Month")) > 12 or int(matchdate.group("Day")) > 31:
+        raise ValueError("Not a valid date.")
+    todays_assignments = []
     for assignment in assignments:
-        duedate = assignment.duedate
+        duedate = assignment. duedate
         if todays_date == duedate:
+            todays_assignments. append(assignment. _str_())
             counter += 1
-    return counter
+    if counter == 0:
+        print (f"You have 0 assignments due on {todays_date}.")
+    if counter != 0:
+        print (f"You have {counter} assignments due on {todays date}. The are:")
+        return todays_assignment 
         
 def assignment_overview(assignment):
     """uses f-string to give an overview of the assignment. Accesses state of the assignment object passed in
