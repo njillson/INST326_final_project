@@ -88,7 +88,7 @@ class Assignment:
     def late_assignment(self):
         """Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
         is over the date due using conditional statemetns, then prints a string to the console suggesting appropriate action. 
-	Print statement includes ballpark of how long until asssignment is due. Requires that a reference to an Assignment instance is passed.
+	Print statement includes ballpark of how long until asssignment is due.
 	Args:
 		assignment(Assignment instance): accesses state of assignment object to us due data, due time, and name in logic.
 		output(boolean): whether to supress console output. Default is true (prints to console).
@@ -145,8 +145,6 @@ class Assignment:
         if(late):
             message = f"Your assignment, {self.name}, is overdue..."
         return (message)
-
-
     
         
 def read_assignments(filepath):
@@ -159,8 +157,7 @@ def read_assignments(filepath):
             assignment = Assignment(line.strip())
             assignments.append(assignment)
     return assignments
-            
-            
+                       
        
 def assignment_counter(asgn_list, counter = 0):
     """use of default parameter to count(int) how many assignments there are
@@ -205,7 +202,7 @@ def course_overview(asgn_list):
     somecourse = input ("What course would you like to look at?")
     for assignment in assignments:
         if assignment.course == somecourse:
-            print(f"""{assignment.name} is due on {assignment.duedate} at {assignment.duetime} and is worth {assignment.points} points\n""")
+            print(f"""\n{assignment.name} is due on {assignment.duedate} at {assignment.duetime} and is worth {assignment.points} points""")
 
 
 def classes_with_work(filename):
