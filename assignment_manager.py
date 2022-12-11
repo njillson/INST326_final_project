@@ -53,7 +53,7 @@ class Assignment:
             self.duetime = match.group("DueTime")
             self.points = int(match.group("Points"))
             self.mil_time = self.military_time()
-            self.late_assign = self.late_assignment()
+            self.late = self.late_assignment()
             
     def __repr__(self):
         return (
@@ -284,7 +284,7 @@ def late(assignment, assgnlist):
     alist = assgnlist.copy()
     for item in alist:
         if item.name == assignment:
-            return(item.late_assignment)
+            return(item.late)
 	
 def parse_args(arglist):
     """ Parse command-line arguments.
@@ -304,7 +304,38 @@ def parse_args(arglist):
     return parser.parse_args(arglist)
 
 if __name__ == "__main__":
-    args = parse_args(sys.argv[1:])
-    for assignment in read_assignments(args.file):
-       		print(f"{assignment!r}\n")
+    args = parse_args(sys.argv[1:])   
+    a = read_assignments(args.file)
+    print("Welcome to the Assignment Manager, if you would like to stop at any time type 'STOP'")
+    check = True
+    while check == True:
+        command = input(f"What would you like to do?\n"
+                    f"1. Check assignments\n"
+                    f"2. Sort assignments by priority (date, time, points)\n"
+                    f"3. Count and view the assignments due on a given day\n"
+                    f"4. See if an assignment is late or not\n"
+                    f"5. See what assignments you still have to do\n"
+                    f"6.Visualize assignment priorities by point value\n"
+                    f"Type the number of the command you would like me to do:")
+        if command == "STOP":
+            check = False
+            print ("See you next time!")
+        if command == "1":
+                print (a)
+        if command == "2":
+            sort_assignments(a)
+        #if command == "3"
+        if command == "4":
+            check4 = True
+            while check4 == True:
+                assignment = input("What assignment would you like to check?")
+                if late(assignment, a) != None:
+                    print(late(assignment, a))
+                    check4 = False
+                else:
+                    print("You don't have that assignment, try again!")
+        #if command == "5"
+        #if command == "6"
+            
+
     
