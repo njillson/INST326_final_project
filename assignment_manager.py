@@ -4,7 +4,6 @@ from argparse import ArgumentParser
 import sys
 from datetime import datetime
 import re
-import seaborn as sns
 import pandas as pd
 
 class Assignment:
@@ -53,8 +52,8 @@ class Assignment:
             self.duedate = match.group("DueDate")
             self.duetime = match.group("DueTime")
             self.points = int(match.group("Points"))
-            self.late_assign = self.late_assignment()
             self.mil_time = self.military_time()
+            self.late_assign = self.late_assignment()
             
     def __repr__(self):
         return (
@@ -79,7 +78,8 @@ class Assignment:
                 hour = 10 * int(hour)
         
         m_time = f"{hour}{minute}"
-        return int(m_time)
+        mil_time = int(m_time)
+        return mil_time
     
     def late_assignment(self):
         """Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
