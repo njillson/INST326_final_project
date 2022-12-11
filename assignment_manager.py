@@ -4,8 +4,8 @@ from argparse import ArgumentParser
 import sys
 from datetime import datetime
 import re
-import pandas as pd
-
+# import pandas as pd
+# import seaborn as sns
 class Assignment:
     """An assignment object
     
@@ -57,11 +57,12 @@ class Assignment:
             
     def __repr__(self):
         return (
-        	f"Course:      {self.course}\n"
-            	f"Name:        {self.name}\n"
-            	f"Due Date:    {self.duedate}\n"
-            	f"Due Time:    {self.duetime}\n"
-            	f"Points:      {self.points}\n"
+        	f"""
+         Course:      {self.course}\n
+         Name:        {self.name}\n
+         Due Date:    {self.duedate}\n
+         Due Time:    {self.duetime}\n
+         Points:      {self.points}\n"""
        	)
     
     def military_time(self):
@@ -139,7 +140,7 @@ class Assignment:
         else:
             message = f"Why is this even on your schedule?! You have {due_y - year} years to complete {self.name}."
         if(late):
-            message = f"You're assignment, {self.name}, is overdue..."
+            message = f"Your assignment, {self.name}, is overdue..."
         return (message)
 
 
@@ -163,7 +164,7 @@ def assignment_counter(filepath, counter = 0):
     for each class for the week specific methods like counter +=1 will be 
     used
 	** Madison Diamond"""
-    assignments = read_assignment(filepath)
+    assignments = read_assignments(filepath)
     todays_date = input ("What date would you like to look at? Please insert in MM/DD/YYYY format:")
     
     
