@@ -4,8 +4,8 @@ from argparse import ArgumentParser
 import sys
 from datetime import datetime
 import re
-# import pandas as pd
-# import seaborn as sns
+import pandas as pd
+import seaborn as sns
 class Assignment:
     """An assignment object
     
@@ -64,6 +64,9 @@ class Assignment:
          Due Time:    {self.duetime}\n
          Points:      {self.points}\n"""
        	)
+    
+    def __str__(self):
+        return f"{self.name} for {self.course}"
     
     def military_time(self):
         hour, minute = self.duetime.strip().split(":")   
@@ -159,54 +162,50 @@ def read_assignments(filepath):
             
             
        
-def assignment_counter(filepath, counter = 0):
+def assignment_counter(asgn_list, counter = 0):
     """use of default parameter to count(int) how many assignments there are
     for each class for the week specific methods like counter +=1 will be 
     used
 	** Madison Diamond"""
-    assignments = read_assignments(filepath)
-    todays_date = input ("What date would you like to look at? Please insert in MM/DD/YYYY format:")
+    assignments = asgn_list.copy()
+    todays_date = input("What date would you like to look at? Please insert in MM/DD/YYYY format:")
     
     
     dateregex = r"""(?xm)
-    (?P<Month> \d{2})
-    \
+    (?P<Month>\d{2})
+    /
     (?P<Day>\d{2})
-    \
+    /
     (?P<Year>\d{4})"""
-    matchdate = re. search (dateregex, todays_date)
+    matchdate = re.search(dateregex, todays_date)
     if matchdate == None:
         raise ValueError('Not a valid date. Please make sure you entered the date in MM/DD/YYYY format.')
     if int (matchdate.group ("Month")) > 12 or int(matchdate.group("Day")) > 31:
         raise ValueError("Not a valid date.")
     todays_assignments = []
     for assignment in assignments:
-        duedate = assignment. duedate
+        duedate = assignment.duedate
         if todays_date == duedate:
-            todays_assignments. append(assignment. _str_())
+            todays_assignments.append(assignment.__str__())
             counter += 1
     if counter == 0:
         print (f"You have 0 assignments due on {todays_date}.")
     if counter != 0:
-        print (f"You have {counter} assignments due on {todays_date}. The are:")
-        return todays_assignments 
+        print (f"You have {counter} assignments due on {todays_date}. They are:") 
+        print (f"{todays_assignments}")
         
-def assignment_overview(assignment):
+def course_overview(asgn_list):
     """uses f-string to give an overview of the assignment. Accesses state of the assignment object passed in
 	Args:
 		assignment (Assignment): Assignment object that the overview will be given of
 	Returns:
 		(str) an overview of the assignment
     	** Taylor Tran """ 
-    assignments = read_assignments(filepath)
+    assignments = asgn_list.copy()
     somecourse = input ("What course would you like to look at?")
-    courseassignments = []
     for assignment in assignments:
         if assignment.course == somecourse:
-            courseassignments.append(f"""{assignment.name} is due on {assignment.duedate} 
-            at {assignment.duetime} and is worth {assignment.points} points""")
-    return courseassignments
-
+            print(f"""{assignment.name} is due on {assignment.duedate} at {assignment.duetime} and is worth {assignment.points} points\n""")
 
 
 def classes_with_work(filename):
@@ -310,14 +309,18 @@ if __name__ == "__main__":
     print("Welcome to the Assignment Manager, if you would like to stop at any time type 'STOP'")
     check = True
     while check == True:
-        command = input(f"What would you like to do?\n"
-                    f"1. Check assignments\n"
-                    f"2. Sort assignments by priority (date, time, points)\n"
-                    f"3. Count and view the assignments due on a given day\n"
-                    f"4. See if an assignment is late or not\n"
-                    f"5. See what assignments you still have to do\n"
-                    f"6.Visualize assignment priorities by point value\n"
-                    f"Type the number of the command you would like me to do:")
+        command = input(f"""
+    What would you like to do?
+                        
+    1. Check all assignments
+    2. Sort assignments by priority (date, time, points)
+    3. Count and view the assignments due on a given day
+    4. See if an assignment is late or not
+    5. View assignments for a chosen course
+    6. See what assignments you still have to do
+    7. Visualize assignment priorities by point value
+                    
+    Type the number of the command you would like me to do:""")
         if command == "STOP":
             check = False
             print ("See you next time!")
@@ -325,7 +328,8 @@ if __name__ == "__main__":
                 print (a)
         if command == "2":
             sort_assignments(a)
-        #if command == "3"
+        if command == "3":
+            assignment_counter(a)
         if command == "4":
             check4 = True
             while check4 == True:
@@ -335,8 +339,10 @@ if __name__ == "__main__":
                     check4 = False
                 else:
                     print("You don't have that assignment, try again!")
-        #if command == "5"
+        if command == "5":
+            course_overview(a)
         #if command == "6"
+        #if command == '7'
             
 
     
