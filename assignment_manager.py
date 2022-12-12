@@ -234,7 +234,8 @@ def classes_with_work(assignments):
 	calls read_asssignment & late_assignment methods
 	
     Returns:
-       (set): classes with work upcoming"""
+       (set): classes with work upcoming
+       **David Greenberg"""
     
     classes = set()
     for task in assignments:
@@ -250,7 +251,7 @@ def visualize_priorities(assignments):
     		(junk) creates instances of Assignment class
 		(output) displays seaborn bar graph
 		calls read_assignments && late_assignment methods
-		***David Greenburg
+		***David Greenberg
 	"""  
     assignment_points = {
 		"Name of Assignment" : [],
