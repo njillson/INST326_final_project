@@ -147,7 +147,7 @@ class Assignment:
             message = f"Your assignment, {self.name}, is overdue..."
 	if(output):
 		print(message)
-        return late
+		return late
     
         
 def read_assignments(filepath):
@@ -212,7 +212,7 @@ def classes_with_work(assignments):
     """Takes text file of assignments where each line satisfies intialization of Assignment class. Reads through all assignments and returns a set of all the
      classes that still have work upcoming (not late). Uses error handling.
     Args:
-    	filename (str): relative or absolute path to a text file of assignments where each line satisfies intialization of Assignment class
+    	assignments (list of Assignment objects): used to iterate over all assignment instances
     Side Effects:
     	(junk) creates instances of Assignment class
 	(output) exceptions print to console
@@ -221,7 +221,7 @@ def classes_with_work(assignments):
     Returns:
        (set): classes with work upcoming"""
 	classes = set()
-	for(task in assignments):
+	for task in assignments:
 		if(task.late_assignment(False)):
 			continue
 		else:
@@ -270,6 +270,7 @@ def late(assignment, assgnlist):
     for item in alist:
         if item.name == assignment:
             return(item)
+    return None
 	
 def parse_args(arglist):
     """ Parse command-line arguments.
@@ -316,18 +317,18 @@ if __name__ == "__main__":
         if command == "3":
             assignment_counter(a)
         if command == "4":
-            check4 = True
-            while check4 == True:
-                assignment = input("What assignment would you like to check?")
-		if late(assignment, a) != None:
+		check4 = True
+		while check4 == True:
+			assignment = input("What assignment would you like to check?")
 			cur = late(assignment, a)
-                    	cur.late_assignment()
-                	check4 = False
-                else:
-                    print("You don't have that assignment, try again!")
+			if cur != None:
+				cur.late_assignment()
+                		check4 = False
+			else:
+				print("You don't have that assignment, try again!")
 
         if command == "5":
-            course_overview(a)
+		course_overview(a)
         if command == "6":
 		classes_with_work(a)
         if command == '7':
