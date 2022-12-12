@@ -85,7 +85,7 @@ class Assignment:
         mil_time = int(m_time)
         return mil_time
     
-    def late_assignment(self):
+    def late_assignment(self, other = True):
         """Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
         is over the date due using conditional statemetns, then prints a string to the console suggesting appropriate action. 
 	Print statement includes ballpark of how long until asssignment is due.
@@ -144,7 +144,9 @@ class Assignment:
             message = f"Why is this even on your schedule?! You have {due_y - year} years to complete {self.name}."
         if(late):
             message = f"Your assignment, {self.name}, is overdue..."
-        return (message)
+	if(output):
+		print(message)
+        return late
     
         
 def read_assignments(filepath):
@@ -213,26 +215,23 @@ def classes_with_work(filename):
     Side Effects:
     	(junk) creates instances of Assignment class
 	(output) exceptions print to console
+	calls read_asssignment & late_assignment methods
 	
     Returns:
        (set): classes with work upcoming"""
-    classes = set()
-    try:
-        with open(filename, 'r', encoding = 'UTF-8') as f:
-            for line in f:
-                try:
-                    temp_set = set()
-                    temp_line = line.replace('\n', '')
-                    cur = Assignment(temp_line)
-                    if(not(late_assignment(cur, False))):
-                        temp_set.add(cur.course)
-                except Exception as e:
-                    print(e)
-                else:
-                    classes = classes | temp_set
-    except:
-        print("Something went wrong with opening the file")
-    return classes
+	try:
+   		assignments = read_assignments(filepath)
+	except:
+		print("Something went wrong with opening the file")
+	classes = set()
+	for(task in assignments):
+		if(task.late_assignment(False)):
+			continue
+		else:
+			temp_set = set(task.course)
+			classes = classes | temp_set
+    
+    	return classes
     
 def visualize_priorities(filename):
 	"""Creates a bargraph to compare/visualize the relative importance of assignments according to their point levels. Only considers upcoming assignments.
@@ -240,8 +239,9 @@ def visualize_priorities(filename):
 	Args:
 		filename (str): relative or absolute path to a text file of assignments where each line satisfies intialization of Assignment class
 	 Side Effects:
-    	(junk) creates instances of Assignment class
+    		(junk) creates instances of Assignment class
 		(output) displays seaborn bar graph
+		calls read_assignments && late_assignment methods
 		***David Greenburg
 	"""    
 	assignment_points = {
@@ -250,20 +250,15 @@ def visualize_priorities(filename):
   		}
 	df = pd.DataFrame(assignment_points)
 	try:
-		with open(filename, 'r', encoding = 'UTF-8') as f:
-			for line in f:
-				try:
-					temp_line = line.replace('\n','')
-					cur = Assignment(temp_line)
-					if(not(late_assignment(cur, False))):
-						temp = {"Assignment" : cur.name, "Point Value" : cur.points}
-						df = df.append(temp, ignore_index = True)
-				except Exception as e:
-					print(e)
+   		assignments = read_assignments(filepath)
 	except:
-		print("Something went wrong with opening the file.")
-	else:
-		sns.barplot(data = df, x = "Assignment", y = "Point Value")
+		print("Something went wrong with opening the file")
+	
+	for task in assignments:
+		if(not(task.late_assignment(False))):
+			temp = {"Assignment" : task.name, "Point Value" : task.points}
+			df.append(temp, ignore_index = True)
+	sns.barplot(data = df, x = "Assignment", y = "Point Value")
         
            
 def sort_assignments(asgn_list):
