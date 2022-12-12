@@ -262,7 +262,7 @@ def visualize_priorities(assignments):
             assignment_points["Point Value"].append(task.points)
             
     df = pd.DataFrame(assignment_points)
-    df.set_index("Name of Assignment")
+    df = df.set_index("Name of Assignment")
     df.plot(kind = 'bar', linewidth = 4)
     plt.xticks(rotation = 45, ha = 'right')
     plt.subplots_adjust(bottom = 0.6)
