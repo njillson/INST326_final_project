@@ -5,8 +5,8 @@ import sys
 from datetime import datetime
 import re
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+#import seaborn as sns
+#import matplotlib.pyplot as plt
 
  
 class Assignment:
@@ -231,8 +231,7 @@ def classes_with_work(assignments):
     return classes
     
 def visualize_priorities(assignments):
-	"""Creates a bargraph to compare/visualize the relative importance of assignments according to their point levels. Only considers upcoming assignments.
-
+    """Creates a bargraph to compare/visualize the relative importance of assignments according to their point levels. Only considers upcoming assignments.
 	Args:
 		filename (str): relative or absolute path to a text file of assignments where each line satisfies intialization of Assignment class
 	 Side Effects:
@@ -240,19 +239,19 @@ def visualize_priorities(assignments):
 		(output) displays seaborn bar graph
 		calls read_assignments && late_assignment methods
 		***David Greenburg
-	"""    
-	assignment_points = {
+	"""  
+    assignment_points = {
 		"Name of Assignment" : [],
 		"Point Value" : []
   		}
-	
-	for task in assignments:
-		if(task.points > 0):
-			assignment_points["Name of Assignment"].append(task.name)
-			assignment_points["Point Value"].append(task.points)
-	df = pd.DataFrame(assignment_points)
-	df.set_index("Name of Assignment")
-	df.plot(kind = 'bar', linewidth = 4)
+    for task in assignments:
+        if(task.points > 0):
+            assignment_points["Name of Assignment"].append(task.name)
+            assignment_points["Point Value"].append(task.points)
+            
+    df = pd.DataFrame(assignment_points)
+    df.set_index("Name of Assignment")
+    df.plot(kind = 'bar', linewidth = 4)
     plt.xticks(rotation = 45, ha = 'right')
     plt.subplots_adjust(bottom = 0.6)
     plt.title("Point Values of All Assignments")
