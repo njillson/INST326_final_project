@@ -1,0 +1,23 @@
+INST326, Exercise 10, 11/20/2022, 9:30 am, 10
+INST335, Draft of Final Paper, 12/11/2022, 11:59 pm, 20
+CCJS300, SPSS Assignment 4, 12/07/2022, 5:00 pm, 12
+INST354, Exam 4, 09/04/2022, 11:59 pm, 100
+INST354, Quiz #4, 12/08/2022, 11:59 pm, 10
+INST326, Practice: Inheritance and Composition, 10/17/2022, 9:30 am, 10
+CCJS300, Survey Asg., 10/28/2022, 5:00 pm, 5
+INST326, Final project proposal, 10/28/2022, 11:59 pm, 15
+INST335, Discussion #1 09/02, 09/02/2022, 2:00 pm, 10
+CCJS332, Introductory Paper, 09/07/2022, 12:00 pm, 10
+INST326, Practice: Python fundamentals 1, 09/12/2022, 9:30 am, 10
+INST326, Engagement: Python Fundamentals 2, 09/12/2022, 2:00 pm, 10
+CCJS388H, Refined Topic & 6 Keywords, 09/12/2022, 2:00 pm, 0
+CCJS332, Final Draft of Resume, 09/21/2022, 12:00 pm, 40
+INST354, Discussion Forum 4, 09/29/2022, 11:59 pm, 10
+INST335, Individual Reflection #1, 09/23/2022, 11:59 pm, 20
+INST326, Exercise: Object-oriented programming, 09/30/2022, 11:00 pm, 10
+CCJS388H, Concept Paper, 09/26/2022, 2:00 pm, 0
+CCJS388H, Plagiarism Certificate, 09/26/2022, 11:59 pm, 20
+INST326, Engagement: Container data types 1, 10/03/2022, 2:00 pm, 10
+INST335, Discussion #4 (Team Charter), 10/03/2022, 11:59 pm, 25
+CCJS388H, Peer Review of Concept Paper, 10/03/2022, 11:59 pm, 3
+INST354, Discussion Forum 5, 10/06/2022, 11:59 pm, 10
