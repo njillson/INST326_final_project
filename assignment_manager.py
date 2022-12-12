@@ -6,6 +6,9 @@ from datetime import datetime
 import re
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
+
+ 
 class Assignment:
     """An assignment object
     
@@ -224,7 +227,7 @@ def classes_with_work(assignments):
     classes = set()
     for task in assignments:
         temp_set = {f"{task.course}"}
-	classes = classes.union(temp_set)
+        classes = classes.union(temp_set)
     return classes
     
 def visualize_priorities(assignments):
@@ -330,12 +333,12 @@ if __name__ == "__main__":
                     print("You don't have that assignment, try again!")
 
         if command == "5":
-	    course_overview(a)
+            course_overview(a)
         if command == "6":
-	    print(f"You have assignments in: \n\t{classes_with_work(a)}")
+            print(f"You have assignments in: \n\t{classes_with_work(a)}")
         if command == '7':
-	    visualize_priorities(a)
-	    print("You will need to close the figure before entering any new commands")
+            visualize_priorities(a)
+            print("You will need to close the figure before entering any new commands")
 		
             
 
