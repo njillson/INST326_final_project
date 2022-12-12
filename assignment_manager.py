@@ -208,7 +208,7 @@ def course_overview(asgn_list):
             print(f"""\n{assignment.name} is due on {assignment.duedate} at {assignment.duetime} and is worth {assignment.points} points""")
 
 
-def classes_with_work(assignments):
+def classes_with_work(assignments):    
     """Takes text file of assignments where each line satisfies intialization of Assignment class. Reads through all assignments and returns a set of all the
      classes that still have work upcoming (not late). Uses error handling.
     Args:
@@ -220,15 +220,15 @@ def classes_with_work(assignments):
 	
     Returns:
        (set): classes with work upcoming"""
-	classes = set()
-	for task in assignments:
-		if(task.late_assignment(False)):
-			continue
-		else:
-			temp_set = set(task.course)
-			classes = classes | temp_set
     
-    	return classes
+    classes = set()
+    for task in assignments:
+        if(task.late_assignment(False)):
+            continue
+        else:
+            temp_set = set(task.course)
+            classes = classes | temp_set
+    return classes
     
 def visualize_priorities(assignments):
 	"""Creates a bargraph to compare/visualize the relative importance of assignments according to their point levels. Only considers upcoming assignments.
@@ -317,22 +317,22 @@ if __name__ == "__main__":
         if command == "3":
             assignment_counter(a)
         if command == "4":
-		check4 = True
-		while check4 == True:
-			assignment = input("What assignment would you like to check?")
-			cur = late(assignment, a)
-			if cur != None:
-				cur.late_assignment()
-                		check4 = False
-			else:
-				print("You don't have that assignment, try again!")
+            check4 = True
+            while check4 == True:
+                assignment = input("What assignment would you like to check?")
+                cur = late(assignment, a)
+                if cur != None:
+                    cur.late_assignment()
+                    check4 = False
+                else:
+                    print("You don't have that assignment, try again!")
 
         if command == "5":
-		course_overview(a)
+            course_overview(a)
         if command == "6":
-		print(f"You still have assignments due in: \n\t{classes_with_work(a)}")
+            print(f"You still have assignments due in: \n\t{classes_with_work(a)}")
         if command == '7':
-		visualize_priorities(a)
+            visualize_priorities(a)
             
 
     
