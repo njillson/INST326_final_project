@@ -103,7 +103,7 @@ class Assignment:
     
     def late_assignment(self, output = True):
         """Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
-        is over the date due using conditional statemetns, then prints a string to the console suggesting appropriate action. 
+        is over the date due using conditional statements, then prints a string to the console suggesting appropriate action. 
 	Print statement includes ballpark of how long until asssignment is due.
 	Args:
 		assignment(Assignment instance): accesses state of assignment object to us due data, due time, and name in logic.
@@ -113,7 +113,9 @@ class Assignment:
 		unless it is overdue.
 	Returns:
 		(boolean): returns whether the assignment is late (True) or not (False)
-    	***Taylor Tran"""
+    	***Taylor Tran 
+        Conditional Expressions
+        """
         cur_date, cur_time = str(datetime.now()).split(" ")
         year, month, day = cur_date.split("-")
         year = int(year)
@@ -212,10 +214,11 @@ def assignment_counter(asgn_list, counter = 0):
 def course_overview(asgn_list):
     """uses f-string to give an overview of the assignment. Accesses state of the assignment object passed in
 	Args:
-		assignment (Assignment): Assignment object that the overview will be given of
+		assignments (Assignment): Assignment object that the overview will be given of
 	Returns:
-		(str) an overview of the assignment
-    	** Taylor Tran """ 
+		(str) an overview of the assignment including due date, due time, and amount of points 
+    	** Taylor Tran
+        f-strings""" 
     assignments = asgn_list.copy()
     somecourse = input ("What course would you like to look at?")
     for assignment in assignments:
