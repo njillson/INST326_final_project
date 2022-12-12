@@ -223,11 +223,8 @@ def classes_with_work(assignments):
     
     classes = set()
     for task in assignments:
-        if(task.late_assignment(False)):
-            continue
-        else:
-            temp_set = set(task.course)
-            classes = classes | temp_set
+        temp_set = {f"{task.course}"}
+	classes = classes.union(temp_set)
     return classes
     
 def visualize_priorities(assignments):
@@ -242,16 +239,21 @@ def visualize_priorities(assignments):
 		***David Greenburg
 	"""    
 	assignment_points = {
-		"Assignment" : [],
+		"Name of Assignment" : [],
 		"Point Value" : []
   		}
-	df = pd.DataFrame(assignment_points)
 	
 	for task in assignments:
-		#if(not(task.late_assignment(False))):
-		temp = {"Assignment" : task.name, "Point Value" : task.points}
-		df.append(temp, ignore_index = True)
-	sns.barplot(data = df, x = "Assignment", y = "Point Value")
+		if(task.points > 0):
+			assignment_points["Name of Assignment"].append(task.name)
+			assignment_points["Point Value"].append(task.points)
+	df = pd.DataFrame(assignment_points)
+	df.set_index("Name of Assignment")
+	df.plot(kind = 'bar', linewidth = 4)
+	plt.xticks(rotation = 45, ha = 'right')
+	plt.subplots_adjust(bottom = 0.6)
+	plt.title("Point Values of All Assignments")
+	plt.show()
         
            
 def sort_assignments(asgn_list):
@@ -328,11 +330,13 @@ if __name__ == "__main__":
                     print("You don't have that assignment, try again!")
 
         if command == "5":
-            course_overview(a)
+	    course_overview(a)
         if command == "6":
-            print(f"You still have assignments due in: \n\t{classes_with_work(a)}")
+	    print(f"You have assignments in: \n\t{classes_with_work(a)}")
         if command == '7':
-            visualize_priorities(a)
+	    visualize_priorities(a)
+	    print("You will need to close the figure before entering any new commands")
+		
             
 
     
