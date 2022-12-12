@@ -64,7 +64,7 @@ class Assignment:
 
         Returns:
             string: formal representation of course, name, duedate, duetime, and points attributes
-        *** Selina Liu
+        *** Selina Liu (Technique: magic methods other than __init__())
         """        
         return (
         	f"""
@@ -277,6 +277,7 @@ def sort_assignments(asgn_list):
         asgn_list (list): list of Assignment objects
         
     Side Effects: Prints to do list
+    *** Selina Liu (Teqchinique: custom list sorting with a key function (possibly a lambda expression))
     """    
     assignments = asgn_list.copy()
     assignments.sort(key = lambda a: (a.duedate, a.mil_time, -(a.points)))
