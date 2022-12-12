@@ -79,6 +79,7 @@ class Assignment:
 
         Returns:
             string: informal representation of an assignment's name and due date
+            ** Natalie Jillson
         """        
         return f"{self.name} for {self.course}"
     
