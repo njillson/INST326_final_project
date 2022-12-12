@@ -248,9 +248,9 @@ def visualize_priorities(assignments):
 	df = pd.DataFrame(assignment_points)
 	
 	for task in assignments:
-		if(not(task.late_assignment(False))):
-			temp = {"Assignment" : task.name, "Point Value" : task.points}
-			df.append(temp, ignore_index = True)
+		#if(not(task.late_assignment(False))):
+		temp = {"Assignment" : task.name, "Point Value" : task.points}
+		df.append(temp, ignore_index = True)
 	sns.barplot(data = df, x = "Assignment", y = "Point Value")
         
            
@@ -303,7 +303,7 @@ if __name__ == "__main__":
     3. Count and view the assignments due on a given day
     4. See if an assignment is late or not
     5. View assignments for a chosen course
-    6. See what assignments you still have to do
+    6. See what courses you still have assignments in
     7. Visualize assignment priorities by point value
                     
     Type the number of the command you would like me to do:""")
@@ -330,7 +330,7 @@ if __name__ == "__main__":
         if command == "5":
 		course_overview(a)
         if command == "6":
-		classes_with_work(a)
+		print(f"You still have assignments due in: \n\t{classes_with_work(a)}")
         if command == '7':
 		visualize_priorities(a)
             
