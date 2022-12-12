@@ -17,7 +17,8 @@ class Assignment:
         duedate(str): date assignment is due
         duetime(str): time assignment is due
         points(int): number of points an assignment is worth
-	late(boolean): whether the due date for an assingment has passed or not
+        mil_time(int): value for military tme sorting
+	    late(boolean): whether the due date for an assingment has passed or not
     """
     def __init__(self, line):
         """Initializes assignment object.
@@ -59,6 +60,12 @@ class Assignment:
             self.late = self.late_assignment(False)
             
     def __repr__(self):
+        """Formal representation of Assignment object
+
+        Returns:
+            string: formal representation of course, name, duedate, duetime, and points attributes
+        *** Selina Liu
+        """        
         return (
         	f"""
          Course:      {self.course}\n
@@ -72,6 +79,12 @@ class Assignment:
         return f"{self.name} for {self.course}"
     
     def military_time(self):
+        """Creates a value for self.duetime that can be compared and sorted
+
+        Returns:
+            int: value for self.duetime tha can be compared and sorted
+        *** Selina Liu
+        """        
         hour, minute = self.duetime.strip().split(":")   
         if "pm" in minute:
             hour = int(hour)
@@ -258,6 +271,13 @@ def visualize_priorities(assignments):
         
            
 def sort_assignments(asgn_list):
+    """Sorts assignments based off of nearest due date and due time, then by highest points
+
+    Args:
+        asgn_list (list): list of Assignment objects
+        
+    Side Effects: Prints to do list
+    """    
     assignments = asgn_list.copy()
     assignments.sort(key = lambda a: (a.duedate, a.mil_time, -(a.points)))
     count = 0
@@ -268,7 +288,17 @@ def sort_assignments(asgn_list):
         print(f"{count}. {name}")
 
 def late(assignment, assgnlist):
-    """To run late assignment method"""
+    """function to run late_assignment method, checks if assignment is in list of objects, and if it is it finds that Assignment 
+    object associated with the assignment name
+
+    Args:
+        assignment (str): assignment name
+        assgnlist (list): list of Assignment objects
+    Returns:
+        Reference: Assignment object
+        NoneType: None 
+    *** Selina Liu    
+    """    
     alist = assgnlist.copy()
     for item in alist:
         if item.name == assignment:
