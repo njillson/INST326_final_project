@@ -148,9 +148,9 @@ class Assignment:
             message = f"Why is this even on your schedule?! You have {due_y - year} years to complete {self.name}."
         if(late):
             message = f"Your assignment, {self.name}, is overdue..."
-	if(output):
-		print(message)
-		return late
+        if(output):
+            print(message)
+            return late
     
         
 def read_assignments(filepath):
@@ -253,10 +253,10 @@ def visualize_priorities(assignments):
 	df = pd.DataFrame(assignment_points)
 	df.set_index("Name of Assignment")
 	df.plot(kind = 'bar', linewidth = 4)
-	plt.xticks(rotation = 45, ha = 'right')
-	plt.subplots_adjust(bottom = 0.6)
-	plt.title("Point Values of All Assignments")
-	plt.show()
+    plt.xticks(rotation = 45, ha = 'right')
+    plt.subplots_adjust(bottom = 0.6)
+    plt.title("Point Values of All Assignments")
+    plt.show()
         
            
 def sort_assignments(asgn_list):
