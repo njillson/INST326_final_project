@@ -4,8 +4,8 @@ from argparse import ArgumentParser
 import sys
 from datetime import datetime
 import re
-# import pandas as pd
-# import matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.pyplot as plt
 
  
 class Assignment:
@@ -75,6 +75,11 @@ class Assignment:
        	)
     
     def __str__(self):
+        """Informal representation of an Assignment object
+
+        Returns:
+            string: informal representation of an assignment's name and due date
+        """        
         return f"{self.name} for {self.course}"
     
     def military_time(self):
