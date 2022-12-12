@@ -218,7 +218,7 @@ def course_overview(asgn_list):
 	Returns:
 		(str) an overview of the assignment including due date, due time, and amount of points 
     	** Taylor Tran
-        f-strings""" 
+        F-strings""" 
     assignments = asgn_list.copy()
     somecourse = input ("What course would you like to look at?")
     for assignment in assignments:
