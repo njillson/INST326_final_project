@@ -15,6 +15,7 @@ class Assignment:
         duedate(str): date assignment is due
         duetime(str): time assignment is due
         points(int): number of points an assignment is worth
+	late(boolean): whether the due date for an assingment has passed or not
     """
     def __init__(self, line):
         """Initializes assignment object.
@@ -53,7 +54,7 @@ class Assignment:
             self.duetime = match.group("DueTime")
             self.points = int(match.group("Points"))
             self.mil_time = self.military_time()
-            self.late = self.late_assignment()
+            self.late = self.late_assignment(False)
             
     def __repr__(self):
         return (
@@ -85,7 +86,7 @@ class Assignment:
         mil_time = int(m_time)
         return mil_time
     
-    def late_assignment(self, other = True):
+    def late_assignment(self, output = True):
         """Passed an assignment, this method tells us if an assignment is past its due date. Checks to see if the assignment 
         is over the date due using conditional statemetns, then prints a string to the console suggesting appropriate action. 
 	Print statement includes ballpark of how long until asssignment is due.
@@ -207,7 +208,7 @@ def course_overview(asgn_list):
             print(f"""\n{assignment.name} is due on {assignment.duedate} at {assignment.duetime} and is worth {assignment.points} points""")
 
 
-def classes_with_work(filename):
+def classes_with_work(assignments):
     """Takes text file of assignments where each line satisfies intialization of Assignment class. Reads through all assignments and returns a set of all the
      classes that still have work upcoming (not late). Uses error handling.
     Args:
@@ -219,10 +220,6 @@ def classes_with_work(filename):
 	
     Returns:
        (set): classes with work upcoming"""
-	try:
-   		assignments = read_assignments(filepath)
-	except:
-		print("Something went wrong with opening the file")
 	classes = set()
 	for(task in assignments):
 		if(task.late_assignment(False)):
@@ -233,7 +230,7 @@ def classes_with_work(filename):
     
     	return classes
     
-def visualize_priorities(filename):
+def visualize_priorities(assignments):
 	"""Creates a bargraph to compare/visualize the relative importance of assignments according to their point levels. Only considers upcoming assignments.
 
 	Args:
@@ -249,10 +246,6 @@ def visualize_priorities(filename):
 		"Point Value" : []
   		}
 	df = pd.DataFrame(assignment_points)
-	try:
-   		assignments = read_assignments(filepath)
-	except:
-		print("Something went wrong with opening the file")
 	
 	for task in assignments:
 		if(not(task.late_assignment(False))):
@@ -276,7 +269,7 @@ def late(assignment, assgnlist):
     alist = assgnlist.copy()
     for item in alist:
         if item.name == assignment:
-            return(item.late)
+            return(item)
 	
 def parse_args(arglist):
     """ Parse command-line arguments.
@@ -326,15 +319,19 @@ if __name__ == "__main__":
             check4 = True
             while check4 == True:
                 assignment = input("What assignment would you like to check?")
-                if late(assignment, a) != None:
-                    print(late(assignment, a))
-                    check4 = False
+		if late(assignment, a) != None:
+			cur = late(assignment, a)
+                    	cur.late_assignment()
+                	check4 = False
                 else:
                     print("You don't have that assignment, try again!")
+
         if command == "5":
             course_overview(a)
-        #if command == "6"
-        #if command == '7'
+        if command == "6":
+		classes_with_work(a)
+        if command == '7':
+		visualize_priorities(a)
             
 
     
