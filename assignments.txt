@@ -21,3 +21,4 @@ INST326, Engagement: Container data types 1, 10/03/2022, 2:00 pm, 10
 INST335, Discussion #4 (Team Charter), 10/03/2022, 11:59 pm, 25
 CCJS388H, Peer Review of Concept Paper, 10/03/2022, 11:59 pm, 3
 INST354, Discussion Forum 5, 10/06/2022, 11:59 pm, 10
+INST354, Case Study Report, 12/16/2022, 11:59 pm, 50

@@ -30,8 +30,7 @@ class Assignment:
             Initializes attributes: name, course, duedate, duetime,
             and points
         
-        ** Plan to uses regex
-        ** Natalie - RegEx
+        *** Natalie Jillson (Technique: Regular Expressions)
         """
         regex = r"""(?xm)
         ^(?P<Course>[A-Z]{4}\d{3}(?:\w?))
@@ -76,6 +75,12 @@ class Assignment:
        	)
     
     def __str__(self):
+        """Informal representation of an Assignment object
+
+        Returns:
+            string: informal representation of an assignment's name and due date
+            ** Natalie Jillson
+        """        
         return f"{self.name} for {self.course}"
     
     def military_time(self):
@@ -113,8 +118,7 @@ class Assignment:
 		unless it is overdue.
 	Returns:
 		(boolean): returns whether the assignment is late (True) or not (False)
-    	***Taylor Tran 
-        Conditional Expressions
+    	*** Taylor Tran (Technique: Conditional Expressions)
         """
         cur_date, cur_time = str(datetime.now()).split(" ")
         year, month, day = cur_date.split("-")
@@ -170,7 +174,15 @@ class Assignment:
 def read_assignments(filepath):
     """uses with statement to open and read assignment file
    will open file and use UTF8 encoding to sort through it
-	** Madison Diamond"""
+	** Madison Diamond
+
+    Args:
+        filepath (str): file containing user data based on their classes and
+        assignments 
+
+    Returns:
+        (str): string of sorted data
+    """
     assignments = []
     with open(filepath, "r", encoding = "utf-8") as f:
         for line in f:
@@ -183,7 +195,20 @@ def assignment_counter(asgn_list, counter = 0):
     """use of default parameter to count(int) how many assignments there are
     for each class for the week specific methods like counter +=1 will be 
     used
-	** Madison Diamond"""
+	*** Madison Diamond (Technique: Optional Parameter)
+    
+    Args:
+        assignments (int): Assignment object that is sorted through and tells the 
+        user information about the count of their assignments
+    Returns (string):
+        returns a string to the user where they can see a count of the assignments 
+        due on todays date 
+
+    
+ 
+ """
+    
+    
     assignments = asgn_list.copy()
     todays_date = input("What date would you like to look at? Please insert in MM/DD/YYYY format:")
     
@@ -281,7 +306,7 @@ def sort_assignments(asgn_list):
         asgn_list (list): list of Assignment objects
         
     Side Effects: Prints to do list
-    *** Selina Liu (Teqchinique: custom list sorting with a key function (possibly a lambda expression))
+    *** Selina Liu (Technique: custom list sorting with a key function (possibly a lambda expression))
     """    
     assignments = asgn_list.copy()
     assignments.sort(key = lambda a: (a.duedate, a.mil_time, -(a.points)))
@@ -311,7 +336,7 @@ def late(assignment, assgnlist):
     return None
 	
 def parse_args(arglist):
-    """ Parse command-line arguments.
+    """Parse command-line arguments.
     
     Expect one mandatory argument, the path to a file of assignments.
     
@@ -321,7 +346,7 @@ def parse_args(arglist):
     Returns:
         namespace: an object with one attribute, file, containing a string.
         
-    ** Natalie - ArgumentParser
+    *** Natalie Jillson (Tenchnique: ArgumentParser)
     """        
     parser = ArgumentParser()
     parser.add_argument("file", help="file containing the details of one assignment per line")
