@@ -8,13 +8,24 @@ Natalie Jillson
 Selina Liu
 Taylor Tran
 
-## Assignments in our repository:
+## Files in our repository:
+README.md: 
+
+
+assignments.txt:
+
 
 ## How to run the program from the command line:
+python3 assignment_manager.py textfilename.txt 
+
+To run it using our example file:
+python3 assignment_manager.py assignments.txt
+
 
 ## Instructions on how to use the program/interpret output:
 
-## Attribution
+
+## Attribution:
 
 ```__init__:```: Natalie Jillson - Regular Expressions
 
