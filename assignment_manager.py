@@ -204,13 +204,10 @@ def assignment_counter(asgn_list, counter = 0):
         user information about the count of their assignments
     Returns (string):
         returns a string to the user where they can see a count of the assignments 
-        due on todays date 
-
-    
- 
- """
-    
-    
+        due on todays date
+    Side effects: prints message regarding if the user has assignments due on a given day  
+    """
+      
     assignments = asgn_list.copy()
     todays_date = input("What date would you like to look at? Please insert in MM/DD/YYYY format:")
     
@@ -350,7 +347,7 @@ def parse_args(arglist):
     Returns:
         namespace: an object with one attribute, file, containing a string.
         
-    *** Natalie Jillson (Tenchnique: ArgumentParser)
+    *** Natalie Jillson (Technique: ArgumentParser)
     """        
     parser = ArgumentParser()
     parser.add_argument("file", help="file containing the details of one assignment per line")
