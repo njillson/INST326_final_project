@@ -9,11 +9,10 @@ Selina Liu
 Taylor Tran
 
 ## Files in our repository:
-README.md: 
+README.md: Project submission documentation  
 
-
-assignments.txt:
-
+assignments.txt: An example text file to use in our program. Each line of the 
+file contains what is parsed as an Assignment object within our script.  
 
 ## How to run the program from the command line:
 python3 assignment_manager.py textfilename.txt 
