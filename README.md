@@ -16,54 +16,28 @@ Taylor Tran
 
 ## Attribution
 
-```__init__:```
-Natalie Jillson
-Regular Expressions
+```__init__:```: Natalie Jillson - Regular Expressions
 
-```__repr___```
-Selina Liu
-Magic methods other than ```__init__```
+```__repr___```: Selina Liu - Magic methods other than ```__init__```
 
-```str```
-Natalie Jillson
-N/A (extra)
+```str```: Natalie Jillson - N/A (extra)
 
-```military_time```
-Selina Liu
-N/A (extra)
+```military_time```: Selina Liu - N/A (extra)
 
-```late_assignment```
-Taylor Tran
-Conditional Expressions
+```late_assignment```: Taylor Tran - Conditional Expressions
 
-```read_assignments```
-Madison Diamond
-```with``` statement
+```read_assignments```: Madison Diamond - ```with``` statement
 
-```assignment_counter```
-Madison Diamond
-Optional parameters
+```assignment_counter```: Madison Diamond - Optional parameters
 
-```course_overview```
-Taylor Tran
-F-strings
+```course_overview```: Taylor Tran - F-strings
 
-```classes_with_work```
-David Greenberg
-Set operations
+```classes_with_work```: David Greenberg - Set operations
 
-```visualize_priorities```
-David Greenberg
-Visualizing data with pyplot
+```visualize_priorities```: David Greenberg - Visualizing data with pyplot
 
-```sort_assignments```
-Selina Liu
-Custom list sorting with a key function
+```sort_assignments```: Selina Liu - Custom list sorting with a key function
 
-```late```
-Selina Liu
-N/A (extra)
+```late```: Selina Liu - N/A (extra)
 
-```parse_args```
-Natalie Jillson
-ArgumentParser class
+```parse_args```: Natalie Jillson - ArgumentParser class
