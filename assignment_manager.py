@@ -174,7 +174,15 @@ class Assignment:
 def read_assignments(filepath):
     """uses with statement to open and read assignment file
    will open file and use UTF8 encoding to sort through it
-	** Madison Diamond"""
+	** Madison Diamond
+
+    Args:
+        filepath (str): file containing user data based on their classes and
+        assignments 
+
+    Returns:
+        (str): string of sorted data
+    """
     assignments = []
     with open(filepath, "r", encoding = "utf-8") as f:
         for line in f:
@@ -183,11 +191,12 @@ def read_assignments(filepath):
     return assignments
                        
        
-def assignment_counter(asgn_list, counter = 0):
-    """use of default parameter to count(int) how many assignments there are
-    for each class for the week specific methods like counter +=1 will be 
-    used
-	*** Madison Diamond (Technique: Optional Parameter)"""
+def assignment_counter(asgn_list, counter = 0): 
+      
+    
+
+
+
     assignments = asgn_list.copy()
     todays_date = input("What date would you like to look at? Please insert in MM/DD/YYYY format:")
     
