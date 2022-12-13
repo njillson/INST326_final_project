@@ -2,10 +2,10 @@
 Assignment manager
 
 ## Team "Team"
-Madison Diamond
-David Greenberg
-Natalie Jillson
-Selina Liu
+Madison Diamond  
+David Greenberg  
+Natalie Jillson  
+Selina Liu  
 Taylor Tran
 
 ## Files in our repository:
