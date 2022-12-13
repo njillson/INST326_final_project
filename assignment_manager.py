@@ -236,7 +236,7 @@ def assignment_counter(asgn_list, counter = 0):
         print (f"You have {counter} assignments due on {todays_date}. They are:") 
         print (f"{todays_assignments}")
         
-def course_overview(asgn_list)
+def course_overview(asgn_list):
     """uses f-string to give an overview of the assignment. Accesses state of the assignment object passed in
 	Args:
 		assignments (Assignment): Assignment object that the overview will be given of
