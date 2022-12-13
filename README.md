@@ -18,7 +18,7 @@ assignments.txt:
 ## How to run the program from the command line:
 python3 assignment_manager.py textfilename.txt 
 
-To run it using our example file:
+To run it using our example file:  
 python3 assignment_manager.py assignments.txt
 
 
