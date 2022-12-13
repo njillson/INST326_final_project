@@ -24,8 +24,16 @@ To run it using our example file:
 python3 assignment_manager.py assignments.txt
 
 
-## Instructions on how to use the program/interpret output:
-
+## Instructions on how to use the program/interpret output:  
+Upon running it in the terminal, the user will be presented with menu options:   
+Option 1: Displays all of the assignments and their details.  
+Option 2: Sorts and displays the assignments based on priority (duedate, duetime, then by ascending point value).    
+Option 3: Counts and displays the assignments on a given date.    
+Option 4: Asks the user what assignment they would like the program to check if it is late or not. Prints a message corresponding with the assignment's lateness.  
+Option 5: Asks user for a course, and displays the assignments for that course.  
+Option 6: Displays classes that still have work given the current date. (Should only return courses that have assignments due after the current date). 
+Option 7: Uses plt module to visualize priorities. (Shows bar graph of assignments and their point value so you can visualize how many points are associated with each assignment)  
+ 
 
 ## Attribution:
 
