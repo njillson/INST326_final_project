@@ -118,6 +118,8 @@ class Assignment:
 		unless it is overdue.
 	Returns:
 		(boolean): returns whether the assignment is late (True) or not (False)
+    Side Effects: 
+        Prints messages to remind user the due date and how much time they have left to complete their assignment 
     	*** Taylor Tran (Technique: Conditional Expressions)
         """
         cur_date, cur_time = str(datetime.now()).split(" ")
@@ -242,6 +244,8 @@ def course_overview(asgn_list):
 		assignments (Assignment): Assignment object that the overview will be given of
 	Returns:
 		(str) an overview of the assignment including due date, due time, and amount of points 
+    Side Effects: 
+        Prints overview of assignment, includes due date, time it is due, and point value 
     	** Taylor Tran
         F-strings""" 
     assignments = asgn_list.copy()
