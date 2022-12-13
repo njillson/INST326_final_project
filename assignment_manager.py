@@ -191,12 +191,24 @@ def read_assignments(filepath):
     return assignments
                        
        
-def assignment_counter(asgn_list, counter = 0): 
-      
+def assignment_counter(asgn_list, counter = 0):
+    """use of default parameter to count(int) how many assignments there are
+    for each class for the week specific methods like counter +=1 will be 
+    used
+	*** Madison Diamond (Technique: Optional Parameter)
     
+    Args:
+        assignments (int): Assignment object that is sorted through and tells the 
+        user information about the count of their assignments
+    Returns (string):
+        returns a string to the user where they can see a count of the assignments 
+        due on todays date 
 
-
-
+    
+ 
+ """
+    
+    
     assignments = asgn_list.copy()
     todays_date = input("What date would you like to look at? Please insert in MM/DD/YYYY format:")
     
@@ -224,7 +236,7 @@ def assignment_counter(asgn_list, counter = 0):
         print (f"You have {counter} assignments due on {todays_date}. They are:") 
         print (f"{todays_assignments}")
         
-def course_overview(asgn_list):
+def course_overview(asgn_list)
     """uses f-string to give an overview of the assignment. Accesses state of the assignment object passed in
 	Args:
 		assignments (Assignment): Assignment object that the overview will be given of
